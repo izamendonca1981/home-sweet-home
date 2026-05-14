@@ -7,18 +7,81 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
-:root{--w5:#C4613A;--w4:#E8956D;--w3:#FFD4A0;--w2:#FFE8CC;--w1:#FFF8F0;--s4:#6A9E6A;--s2:#D4E8D4;--s3:#A8CCA8;--gold:#F5C842}
+:root{--w5:#C4613A;--w4:#E8956D;--w3:#FFD4A0;--w2:#FFE8CC;--w1:#FFF8F0;--s4:#6A9E6A;--s2:#D4E8D4;--s3:#A8CCA8;--gold:#F5C842;--red:#F09595}
 body{background:#f5f0ea;min-height:100vh}
 .app{max-width:480px;margin:0 auto;padding:1rem}
-.hdr{text-align:center;padding:1rem;background:var(--w1);border-radius:16px;margin-bottom:1rem;border:.5px solid #eee}
-.hdr h1{font-size:20px;font-weight:600;color:#333}
-.hdr p{font-size:12px;color:#888;margin-top:2px}
+
+/* LOGIN */
+.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f5f0ea;padding:1rem}
+.login-card{background:#fff;border-radius:20px;padding:2rem;width:100%;max-width:360px;box-shadow:0 4px 24px rgba(0,0,0,0.08)}
+.login-card h1{font-size:22px;font-weight:700;color:#333;text-align:center;margin-bottom:4px}
+.login-card p{font-size:13px;color:#888;text-align:center;margin-bottom:1.5rem}
+.player-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.5rem}
+.player-login-btn{padding:12px 8px;border-radius:12px;border:1.5px solid #eee;background:#f9f9f9;cursor:pointer;text-align:center;transition:all .2s}
+.player-login-btn:hover{border-color:var(--w3);background:var(--w1)}
+.player-login-btn.selected{border-color:var(--w4);background:var(--w2)}
+.player-login-btn .emoji{font-size:28px;display:block;margin-bottom:4px}
+.player-login-btn .pname{font-size:13px;font-weight:600;color:#333}
+.login-input{width:100%;padding:10px 12px;border-radius:10px;border:1.5px solid #eee;font-size:14px;color:#333;margin-bottom:10px;background:#f9f9f9}
+.login-input:focus{outline:none;border-color:var(--w4)}
+.login-btn{width:100%;padding:12px;background:var(--w5);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.login-btn:hover{background:var(--w4)}
+.login-error{font-size:12px;color:#C44444;text-align:center;margin-bottom:8px;display:none}
+
+/* HEADER */
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:.8rem 1rem;background:var(--w1);border-radius:16px;margin-bottom:1rem;border:.5px solid #eee}
+.hdr-title{text-align:center;flex:1}
+.hdr-title h1{font-size:18px;font-weight:700;color:#333}
+.hdr-title p{font-size:11px;color:#888;margin-top:1px}
+.hdr-user{display:flex;align-items:center;gap:6px;cursor:pointer}
+.hdr-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px}
+.hdr-logout{font-size:11px;color:#888;background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;background:#f0f0f0}
+
+/* NAV */
 .nav{display:flex;gap:6px;margin-bottom:1rem;overflow-x:auto;padding-bottom:2px}
 .nav button{padding:6px 12px;border-radius:20px;border:.5px solid #ddd;background:#fff;color:#888;font-size:12px;cursor:pointer;white-space:nowrap}
 .nav button.active{background:var(--w2);color:var(--w5);border-color:var(--w3);font-weight:600}
 .sec{display:none}.sec.active{display:block}
+
+/* MESTRE CUCA CARD */
+.cuca-card{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:1.5px solid #FF8C00;border-radius:16px;margin-bottom:1rem;overflow:hidden}
+.cuca-hdr{padding:12px 16px 8px;display:flex;align-items:center;gap:10px}
+.cuca-title{font-size:15px;font-weight:700;color:#7A3500}
+.cuca-sub{font-size:11px;color:#A05000;margin-top:2px}
+.cuca-scene{position:relative;background:linear-gradient(180deg,#FFF8E1 60%,#FFE0B2 100%);height:90px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pan-wrap{font-size:50px;animation:panShake .5s ease-in-out infinite alternate}
+@keyframes panShake{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+.steam{position:absolute;top:5px;font-size:20px;animation:steamRise 1.5s ease-in-out infinite}
+.steam1{left:35%;animation-delay:0s}
+.steam2{left:45%;animation-delay:.5s}
+.steam3{left:55%;animation-delay:1s}
+@keyframes steamRise{0%{opacity:0;transform:translateY(0)}50%{opacity:1}100%{opacity:0;transform:translateY(-30px)}}
+.cuca-stats{display:flex;gap:8px;padding:8px 14px}
+.cuca-stat{flex:1;background:rgba(255,255,255,.7);border-radius:10px;padding:7px;text-align:center}
+.cuca-stat-val{font-size:18px;font-weight:700;color:#C4613A}
+.cuca-stat-lbl{font-size:10px;color:#A05000;margin-top:1px}
+.cuca-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px}
+.cuca-btn{padding:8px;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.cuca-btn.solo{background:#FF8C00;color:#fff}
+.cuca-btn.full{background:#E65100;color:#fff}
+.cuca-btn.duo-s{background:#FFB300;color:#fff}
+.cuca-btn.duo-f{background:#F57F17;color:#fff}
+
+/* CHEF SELOS TROCA */
+.chef-seals-card{background:#fff;border:.5px solid #eee;border-radius:12px;padding:12px;margin-bottom:1rem}
+.chef-seals-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.chef-seals-title{font-size:13px;font-weight:600;color:#333}
+.chef-seal-count{font-size:20px;font-weight:700;color:#FF8C00}
+.troca-btn{padding:5px 12px;background:#FF8C00;color:#fff;border:none;border-radius:8px;font-size:12px;cursor:pointer;font-weight:600}
+.troca-list{display:flex;flex-direction:column;gap:5px}
+.troca-item{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:#FFF8F0;border-radius:8px;border:.5px solid #FFD4A0}
+.troca-item-info{font-size:12px;color:#333}
+.troca-item-cost{font-size:11px;color:#FF8C00;font-weight:600}
+.troca-item-btn{padding:4px 10px;background:#FF8C00;color:#fff;border:none;border-radius:6px;font-size:11px;cursor:pointer}
+
+/* WATER */
 .water-card{border-radius:12px;padding:12px;margin-bottom:1rem;display:flex;align-items:center;gap:10px;border:.5px solid var(--w3);background:var(--w1)}
-.water-card.alert{background:#FFF0F0;border-color:#F09595;animation:pulse .8s ease-in-out infinite alternate}
+.water-card.alert{background:#FFF0F0;border-color:var(--red);animation:pulse .8s ease-in-out infinite alternate}
 @keyframes pulse{from{box-shadow:0 0 0 0 rgba(240,149,149,.4)}to{box-shadow:0 0 0 6px rgba(240,149,149,0)}}
 .water-info{flex:1}
 .water-name{font-size:13px;font-weight:600;color:var(--w5)}
@@ -26,24 +89,56 @@ body{background:#f5f0ea;min-height:100vh}
 .water-timer{font-size:12px;font-weight:600;margin-top:3px;color:#C44444}
 .wbtns{display:flex;flex-direction:column;gap:5px}
 .wbtn{padding:5px 10px;border:none;border-radius:8px;font-size:11px;cursor:pointer;font-weight:600}
-.wbtn.rep{background:#F09595;color:#fff}.wbtn.ref{background:var(--s4);color:#fff}
+.wbtn.rep{background:var(--red);color:#fff}.wbtn.ref{background:var(--s4);color:#fff}
 .wbtn-next{padding:4px 8px;background:#f0f0f0;border:.5px solid #ddd;border-radius:6px;font-size:10px;cursor:pointer;color:#888;margin-top:4px}
+
+/* TEAM */
 .team-bar{background:#fff;border:.5px solid #eee;border-radius:12px;padding:1rem;margin-bottom:1rem}
 .team-bar h3{font-size:12px;color:#888;margin-bottom:8px;font-weight:400}
 .prog-wrap{position:relative;height:22px;background:#f0f0f0;border-radius:11px;overflow:hidden;margin-bottom:5px}
 .prog-fill{height:100%;border-radius:11px;background:linear-gradient(90deg,var(--w4),var(--gold));transition:width .8s}
 .prog-lbl{display:flex;justify-content:space-between;font-size:11px;color:#888}
 .milestone{position:absolute;top:0;height:100%;width:2px;background:rgba(255,255,255,.6)}
+
+/* PLAYERS */
 .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:8px;margin-bottom:1rem}
-.pcard{background:#fff;border:.5px solid #eee;border-radius:12px;padding:10px;text-align:center;position:relative}
+.pcard{background:#fff;border:.5px solid #eee;border-radius:12px;padding:10px;text-align:center;position:relative;cursor:pointer;transition:all .2s}
+.pcard:hover{border-color:var(--w3);transform:translateY(-2px)}
 .pcard.wawa{border-color:var(--w3);background:var(--w1)}
-.pcard.neg{border-color:#F09595}
+.pcard.neg{border-color:var(--red)}
+.pcard.me{border-color:var(--w4);border-width:2px}
 .av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;margin:0 auto 6px}
 .pname{font-size:12px;font-weight:600;color:#333}
 .ppts{font-size:18px;font-weight:700;color:var(--w5);margin:1px 0}
 .pbadge{font-size:9px;color:#888}
 .mtag{position:absolute;top:5px;right:5px;background:var(--w2);color:var(--w5);font-size:8px;padding:1px 4px;border-radius:6px;font-weight:600}
 .nseal{position:absolute;top:5px;left:5px;font-size:10px}
+
+/* PROFILE MODAL */
+.profile-hdr{display:flex;align-items:center;gap:12px;margin-bottom:1rem;padding-bottom:1rem;border-bottom:.5px solid #eee}
+.profile-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px}
+.profile-name{font-size:18px;font-weight:700;color:#333}
+.profile-pts{font-size:14px;color:var(--w5);font-weight:600}
+.profile-tabs{display:flex;gap:6px;margin-bottom:1rem}
+.profile-tab{flex:1;padding:6px;border-radius:8px;border:.5px solid #ddd;background:#f5f5f5;font-size:12px;cursor:pointer;text-align:center;color:#888}
+.profile-tab.active{background:var(--w2);color:var(--w5);border-color:var(--w3);font-weight:600}
+.profile-log{display:flex;flex-direction:column;gap:5px;max-height:300px;overflow-y:auto}
+.profile-log-item{display:flex;align-items:center;gap:8px;padding:8px;background:#f9f9f9;border-radius:8px}
+.profile-log-icon{font-size:16px}
+.profile-log-info{flex:1}
+.profile-log-name{font-size:12px;color:#333;font-weight:500}
+.profile-log-date{font-size:10px;color:#888;margin-top:1px}
+.profile-log-pts{font-size:13px;font-weight:700;color:var(--w5)}
+.profile-log-photo{width:40px;height:40px;border-radius:6px;object-fit:cover;cursor:pointer}
+.seals-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.seal-item{background:#f9f9f9;border-radius:10px;padding:10px;text-align:center}
+.seal-item.active{background:var(--w2);border:.5px solid var(--w3)}
+.seal-item.neg-active{background:#FFF5F5;border:.5px solid var(--red)}
+.seal-emoji{font-size:24px;margin-bottom:4px}
+.seal-name{font-size:10px;font-weight:600;color:#333}
+.seal-status{font-size:9px;color:#888;margin-top:2px}
+
+/* TASKS */
 .tfilt{display:flex;gap:5px;margin-bottom:1rem;flex-wrap:wrap}
 .tfilt button{padding:3px 10px;border-radius:14px;border:.5px solid #ddd;background:#fff;color:#888;font-size:11px;cursor:pointer}
 .tfilt button.active{background:var(--s2);color:var(--s4);border-color:var(--s3)}
@@ -56,14 +151,33 @@ body{background:#f5f0ea;min-height:100vh}
 .tdone{font-size:10px;color:var(--s4);margin-top:2px;font-weight:600}
 .tpts{font-size:14px;font-weight:600;color:var(--w5);white-space:nowrap}
 .rbadge{font-size:8px;background:var(--gold);color:#7A5500;padding:1px 5px;border-radius:6px;font-weight:600;margin-left:4px}
+
+/* FEED DE FOTOS */
+.feed{display:flex;flex-direction:column;gap:10px}
+.feed-item{background:#fff;border-radius:12px;overflow:hidden;border:.5px solid #eee}
+.feed-hdr{display:flex;align-items:center;gap:8px;padding:10px 12px}
+.feed-avatar{font-size:20px}
+.feed-info{flex:1}
+.feed-player{font-size:13px;font-weight:600;color:#333}
+.feed-task{font-size:11px;color:#888}
+.feed-pts{font-size:13px;font-weight:700;color:var(--w5)}
+.feed-photo{width:100%;max-height:200px;object-fit:cover;display:block}
+.feed-time{font-size:10px;color:#888;padding:6px 12px}
+.feed-contest-btn{margin:0 12px 10px;width:calc(100% - 24px);padding:7px;background:#FFF0F0;color:#C44444;border:.5px solid var(--red);border-radius:8px;font-size:12px;cursor:pointer;font-weight:500}
+
+/* COMBOS */
 .ccard{background:#fff;border:.5px solid #eee;border-radius:10px;padding:9px 11px;margin-bottom:5px}
 .cname{font-size:13px;font-weight:600;color:#333}.ctasks{font-size:10px;color:#888;margin-top:2px}
 .cmult{font-size:13px;font-weight:600;color:var(--w5);float:right;margin-top:-18px}
+
+/* SEALS */
 .sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
 .scard{background:#fff;border:.5px solid #eee;border-radius:12px;padding:10px;text-align:center}
-.scard.neg{border-color:#F09595;background:#FFF5F5}
+.scard.neg{border-color:var(--red);background:#FFF5F5}
 .semoji{font-size:24px;margin-bottom:5px}.sname{font-size:11px;font-weight:600;color:#333}
 .sdesc{font-size:10px;color:#888;margin-top:2px;line-height:1.4}.spen{font-size:10px;color:#C44444;margin-top:2px;font-weight:600}
+
+/* CONTESTS */
 .citem{background:#fff;border:.5px solid #eee;border-radius:10px;padding:11px;margin-bottom:8px}
 .chdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:4px}
 .ctitle{font-size:12px;font-weight:600;color:#333}
@@ -71,51 +185,141 @@ body{background:#f5f0ea;min-height:100vh}
 .svoting{background:#E3F2FD;color:#1565C0}.sdefense{background:#FFF8E1;color:#7A5500}
 .vbtns{display:flex;gap:6px;margin-top:6px}
 .vbtn{flex:1;padding:5px;border-radius:8px;border:.5px solid #eee;font-size:11px;cursor:pointer}
-.vvalid{background:var(--s2);color:var(--s4);border-color:var(--s3)}.vinvalid{background:#FFEBEE;color:#C44444;border-color:#F09595}
+.vvalid{background:var(--s2);color:var(--s4);border-color:var(--s3)}.vinvalid{background:#FFEBEE;color:#C44444;border-color:var(--red)}
+
+/* POLL */
 .popt{background:#f5f5f5;border:.5px solid #eee;border-radius:10px;padding:9px 12px;margin-bottom:5px;cursor:pointer;transition:all .2s}
 .popt:hover{border-color:var(--w4);background:var(--w1)}.popt.voted{border-color:var(--s4);background:#F0F7F0}
 .pbar{height:4px;background:var(--s2);border-radius:2px;margin-top:5px}
 .pfill{height:100%;background:var(--s4);border-radius:2px;transition:width .5s}
+
+/* MODAL */
 .moverlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:100;padding:1rem}
 .modal{background:#fff;border-radius:16px;padding:1.4rem;width:100%;max-width:360px;max-height:85vh;overflow-y:auto}
 .modal h3{font-size:15px;font-weight:600;margin-bottom:1rem;color:#333}
 .mclose{float:right;background:none;border:none;font-size:20px;cursor:pointer;color:#888;margin-top:-4px}
-.psel{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:1rem}
-.pbtn{padding:7px;border-radius:8px;border:.5px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;color:#333;transition:all .2s}
-.pbtn.selected{background:var(--w2);border-color:var(--w4);color:var(--w5);font-weight:600}
 .photo{border:1.5px dashed #ddd;border-radius:10px;padding:1.1rem;text-align:center;margin-bottom:1rem;cursor:pointer;transition:all .2s}
 .photo:hover{border-color:var(--w4);background:var(--w1)}
 .photo.ok{border-color:var(--s4);background:#F0F7F0}
 .btn1{width:100%;padding:10px;background:var(--w5);color:#fff;border:none;border-radius:10px;font-size:13px;cursor:pointer;font-weight:600;margin-top:4px}
+.btn1:hover{background:var(--w4)}
 .btn2{width:100%;padding:10px;background:#f0f0f0;color:#333;border:.5px solid #ddd;border-radius:10px;font-size:13px;cursor:pointer;margin-top:8px}
 .cprev{display:none;background:var(--w1);border:.5px solid var(--w3);border-radius:8px;padding:7px 10px;margin-bottom:8px;font-size:11px;color:var(--w5)}
-.sel-input{width:100%;padding:8px;border-radius:8px;border:.5px solid #ddd;background:#fff;color:#333;font-size:12px;margin-bottom:8px}
+.sel-input{width:100%;padding:8px 10px;border-radius:8px;border:.5px solid #ddd;background:#f9f9f9;color:#333;font-size:13px;margin-bottom:8px}
+.txt-input{width:100%;padding:8px 10px;border-radius:8px;border:.5px solid #ddd;background:#f9f9f9;color:#333;font-size:13px;margin-bottom:8px;resize:vertical;min-height:70px;font-family:sans-serif}
+.psel{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:1rem}
+.pbtn{padding:7px;border-radius:8px;border:.5px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;color:#333;transition:all .2s}
+.pbtn.selected{background:var(--w2);border-color:var(--w4);color:var(--w5);font-weight:600}
+
+/* UTILS */
 .loading{text-align:center;padding:2rem;color:#888;font-size:13px}
 .spinner{width:28px;height:28px;border:3px solid #f0f0f0;border-top-color:var(--w5);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--w5);color:#fff;padding:11px 22px;border-radius:18px;font-size:13px;font-weight:500;z-index:200;animation:tin .3s ease;white-space:nowrap;pointer-events:none;max-width:90vw;text-align:center}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--w5);color:#fff;padding:11px 22px;border-radius:18px;font-size:13px;font-weight:500;z-index:300;animation:tin .3s ease;white-space:nowrap;pointer-events:none;max-width:90vw;text-align:center}
 @keyframes tin{from{opacity:0;transform:translateX(-50%) translateY(-20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 @keyframes tout{from{opacity:1}to{opacity:0;transform:translateX(-50%) translateY(-20px)}}
 .panim{position:fixed;pointer-events:none;font-size:22px;font-weight:700;color:var(--w5);z-index:300;animation:pf 1.5s ease forwards}
 @keyframes pf{0%{opacity:1;transform:translateY(0) translateX(-50%)}100%{opacity:0;transform:translateY(-70px) translateX(-50%)}}
+.lbl{font-size:11px;color:#888;margin-bottom:5px;display:block}
+.section-title{font-size:13px;font-weight:600;color:#333;margin-bottom:10px}
+.empty{text-align:center;padding:2rem;color:#888;font-size:13px}
 </style>
 </head>
 <body>
+
+<!-- LOGIN -->
+<div id="login-screen" class="login-screen">
+  <div class="login-card">
+    <div style="font-size:36px;text-align:center;margin-bottom:8px">🏠</div>
+    <h1>Home Sweet Home</h1>
+    <p>Selecione seu perfil e entre com sua senha</p>
+    <div class="player-grid" id="login-players"></div>
+    <div id="login-error" class="login-error">Senha incorreta. Tente novamente.</div>
+    <input type="password" id="login-password" class="login-input" placeholder="Sua senha..." style="display:none"/>
+    <div id="first-access" style="display:none">
+      <p style="font-size:12px;color:#888;margin-bottom:8px;text-align:center">Primeiro acesso! Crie sua senha:</p>
+      <input type="password" id="new-password" class="login-input" placeholder="Nova senha..."/>
+      <input type="password" id="confirm-password" class="login-input" placeholder="Confirmar senha..."/>
+    </div>
+    <button class="login-btn" id="login-btn" onclick="doLogin()" style="display:none">Entrar</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app-screen" style="display:none">
 <div class="app">
   <div class="hdr">
-    <div style="font-size:28px;margin-bottom:4px">🏠</div>
-    <h1>Home Sweet Home</h1>
-    <p id="month-lbl">Carregando...</p>
+    <div style="font-size:24px">🏠</div>
+    <div class="hdr-title">
+      <h1>Home Sweet Home</h1>
+      <p id="month-lbl">Carregando...</p>
+    </div>
+    <div class="hdr-user" onclick="openMyProfile()">
+      <div class="hdr-avatar" id="hdr-avatar"></div>
+      <button class="hdr-logout" onclick="doLogout(event)">Sair</button>
+    </div>
   </div>
+
   <div class="nav">
     <button class="active" onclick="showSec('dashboard',this)">Início</button>
+    <button onclick="showSec('feed',this)">📸 Feed</button>
     <button onclick="showSec('tasks',this)">Tarefas</button>
     <button onclick="showSec('combos',this)">Combos</button>
     <button onclick="showSec('seals',this)">Selos</button>
     <button onclick="showSec('contests',this)">Contestações</button>
     <button onclick="showSec('poll',this)">Premiação</button>
   </div>
+
+  <!-- DASHBOARD -->
   <div id="dashboard" class="sec active">
+    <!-- MESTRE CUCA -->
+    <div class="cuca-card">
+      <div class="cuca-hdr">
+        <div style="font-size:24px">👨‍🍳</div>
+        <div>
+          <div class="cuca-title">Mestre Cuca Lendário</div>
+          <div class="cuca-sub">Cozinhe e ganhe pontos lendários!</div>
+        </div>
+        <div style="margin-left:auto;text-align:right">
+          <div style="font-size:20px;font-weight:700;color:#E65100" id="cuca-pts">0</div>
+          <div style="font-size:10px;color:#A05000">pts este mês</div>
+        </div>
+      </div>
+      <div class="cuca-scene">
+        <div class="steam steam1">💨</div>
+        <div class="steam steam2">💨</div>
+        <div class="steam steam3">💨</div>
+        <div class="pan-wrap">🍳</div>
+      </div>
+      <div class="cuca-stats">
+        <div class="cuca-stat"><div class="cuca-stat-val" id="cuca-count">0</div><div class="cuca-stat-lbl">refeições</div></div>
+        <div class="cuca-stat"><div class="cuca-stat-val" id="cuca-duos">0</div><div class="cuca-stat-lbl">duplas</div></div>
+        <div class="cuca-stat"><div class="cuca-stat-val" id="cuca-chef-seals">0</div><div class="cuca-stat-lbl">selos chef</div></div>
+      </div>
+      <div class="cuca-btns">
+        <button class="cuca-btn solo" onclick="openCucaModal('solo-prato')">🍽️ 1 Prato (60pts)</button>
+        <button class="cuca-btn full" onclick="openCucaModal('solo-completo')">🍱 Completa (120pts)</button>
+        <button class="cuca-btn duo-s" onclick="openCucaModal('dupla-prato')">👫 Dupla 1 Prato (80pts)</button>
+        <button class="cuca-btn duo-f" onclick="openCucaModal('dupla-completo')">👫 Dupla Completa (150pts)</button>
+      </div>
+    </div>
+
+    <!-- CHEF SELOS TROCA -->
+    <div class="chef-seals-card" id="chef-seals-section" style="display:none">
+      <div class="chef-seals-hdr">
+        <div>
+          <div class="chef-seals-title">👨‍🍳 Selos Chef da Semana</div>
+          <div style="font-size:11px;color:#888;margin-top:2px">Troque por bônus especiais</div>
+        </div>
+        <div style="text-align:right">
+          <div class="chef-seal-count" id="my-chef-seals">0</div>
+          <div style="font-size:10px;color:#888">selos</div>
+        </div>
+      </div>
+      <div class="troca-list" id="troca-list"></div>
+    </div>
+
+    <!-- WATER -->
     <div class="water-card" id="water-card">
       <div style="font-size:24px">💧</div>
       <div class="water-info">
@@ -129,6 +333,8 @@ body{background:#f5f0ea;min-height:100vh}
         <button class="wbtn-next" onclick="nextGuardian()">↻ Próx. semana</button>
       </div>
     </div>
+
+    <!-- TEAM -->
     <div class="team-bar">
       <h3>Meta da equipe — <span id="team-month"></span></h3>
       <div class="prog-wrap">
@@ -140,10 +346,19 @@ body{background:#f5f0ea;min-height:100vh}
         <span>Meta: 3.500 <span style="color:var(--w4)">/ 4.000 desafio</span></span>
       </div>
     </div>
+
     <div class="loading" id="players-loading"><div class="spinner"></div>Carregando...</div>
     <div class="pgrid" id="pgrid" style="display:none"></div>
     <button class="btn1" onclick="openTaskModal()" style="margin-top:.5rem">+ Registrar tarefa</button>
   </div>
+
+  <!-- FEED -->
+  <div id="feed" class="sec">
+    <p class="section-title">📸 Tarefas recentes</p>
+    <div class="feed" id="feed-list"></div>
+  </div>
+
+  <!-- TASKS -->
   <div id="tasks" class="sec">
     <div class="tfilt">
       <button class="active" onclick="filterT('all',this)">Todas</button>
@@ -158,7 +373,9 @@ body{background:#f5f0ea;min-height:100vh}
     </div>
     <div class="tlist" id="tlist"></div>
   </div>
+
   <div id="combos" class="sec"><div id="clist"></div></div>
+
   <div id="seals" class="sec">
     <p style="font-size:12px;color:#888;margin-bottom:8px">Selos positivos</p>
     <div class="sgrid" id="pos-seals"></div>
@@ -167,11 +384,13 @@ body{background:#f5f0ea;min-height:100vh}
     <p style="font-size:12px;color:#888;margin:12px 0 8px">Todos os selos negativos</p>
     <div class="sgrid" id="neg-seals"></div>
   </div>
+
   <div id="contests" class="sec">
     <div style="background:var(--w1);border:.5px solid var(--w3);border-radius:8px;padding:8px 12px;font-size:11px;color:var(--w5);margin-bottom:1rem">Contestações ficam abertas 24h para defesa. Após isso a equipe vota.</div>
     <div id="ctest-list"></div>
     <button class="btn2" onclick="openContestModal()" style="margin-top:8px">+ Nova contestação</button>
   </div>
+
   <div id="poll" class="sec">
     <div style="background:#fff;border:.5px solid #eee;border-radius:12px;padding:1rem">
       <p style="font-size:13px;font-weight:600;color:#333;margin-bottom:3px" id="poll-title">Premiação</p>
@@ -181,600 +400,113 @@ body{background:#f5f0ea;min-height:100vh}
     </div>
   </div>
 </div>
+</div>
+
+<!-- TASK MODAL -->
 <div class="moverlay" id="task-modal" style="display:none">
   <div class="modal">
     <h3>Registrar tarefa <button class="mclose" onclick="closeM('task-modal')">×</button></h3>
-    <p style="font-size:11px;color:#888;margin-bottom:7px">Quem está registrando?</p>
-    <div class="psel" id="modal-players"></div>
-    <p style="font-size:11px;color:#888;margin-bottom:5px">Selecione a tarefa</p>
+    <label class="lbl">Selecione a tarefa</label>
     <select id="tsel" class="sel-input"><option value="">Escolha uma tarefa...</option></select>
     <div id="cprev" class="cprev"></div>
     <div class="photo" id="photo-task" onclick="simPhoto('photo-task')">
       <div style="font-size:20px;margin-bottom:3px">📷</div>
-      <p style="font-size:12px;color:#888">Toque para adicionar foto</p>
+      <p style="font-size:12px;color:#888">Foto da tarefa realizada</p>
       <p style="font-size:10px;color:#aaa;margin-top:1px">(obrigatório)</p>
     </div>
     <button class="btn1" onclick="submitTask()">Confirmar tarefa</button>
     <button class="btn2" onclick="closeM('task-modal')">Cancelar</button>
   </div>
 </div>
+
+<!-- CUCA MODAL -->
+<div class="moverlay" id="cuca-modal" style="display:none">
+  <div class="modal">
+    <h3 id="cuca-modal-title">👨‍🍳 Registrar Cozinhada <button class="mclose" onclick="closeM('cuca-modal')">×</button></h3>
+    <div id="cuca-duo-select" style="display:none">
+      <label class="lbl">Quem é o(a) parceiro(a)?</label>
+      <div class="psel" id="cuca-partner"></div>
+    </div>
+    <label class="lbl">O que foi preparado?</label>
+    <input type="text" id="cuca-dish" class="sel-input" placeholder="Ex: Frango grelhado com arroz e salada"/>
+    <div class="photo" id="photo-cuca" onclick="simPhoto('photo-cuca')">
+      <div style="font-size:20px;margin-bottom:3px">📷</div>
+      <p style="font-size:12px;color:#888">Foto do prato preparado</p>
+      <p style="font-size:10px;color:#aaa;margin-top:1px">(obrigatório)</p>
+    </div>
+    <button class="btn1" onclick="submitCuca()">Confirmar</button>
+    <button class="btn2" onclick="closeM('cuca-modal')">Cancelar</button>
+  </div>
+</div>
+
+<!-- CONTEST MODAL -->
 <div class="moverlay" id="contest-modal" style="display:none">
   <div class="modal">
     <h3>Nova contestação <button class="mclose" onclick="closeM('contest-modal')">×</button></h3>
-    <p style="font-size:11px;color:#888;margin-bottom:7px">Quem está contestando?</p>
-    <div class="psel" id="c-reporter"></div>
-    <p style="font-size:11px;color:#888;margin:8px 0 5px">Quem está sendo contestado?</p>
+    <label class="lbl">Quem você está contestando?</label>
     <div class="psel" id="c-accused"></div>
-    <p style="font-size:11px;color:#888;margin:8px 0 5px">Tipo</p>
+    <label class="lbl">Tipo de contestação</label>
     <select id="ctype" class="sel-input">
       <option>Tarefa mal feita</option>
       <option>Bagunçeiro — roupa/sapato espalhado</option>
       <option>Geladeira Criativa — panela na geladeira</option>
     </select>
+    <label class="lbl">Descreva o motivo</label>
+    <textarea id="contest-reason" class="txt-input" placeholder="Explique detalhadamente o motivo da contestação..."></textarea>
     <div class="photo" id="photo-contest" onclick="simPhoto('photo-contest')">
       <div style="font-size:20px;margin-bottom:3px">📷</div>
       <p style="font-size:12px;color:#888">Foto como evidência</p>
+      <p style="font-size:10px;color:#aaa;margin-top:1px">(obrigatório)</p>
     </div>
     <button class="btn1" style="margin-top:8px" onclick="submitContest()">Enviar contestação</button>
     <button class="btn2" onclick="closeM('contest-modal')">Cancelar</button>
   </div>
 </div>
-<script>
-const SB=supabase.createClient(
-  'https://gockclaydeemomxqmzdx.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdvY2tjbGF5ZGVlbW9teHFtemR4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg3MDA4NzEsImV4cCI6MjA5NDI3Njg3MX0.cLyLvZcQsm3GVwP6T7OGl1WQgj6zOpEJqyu8nS9OJW0'
+
+<!-- PROFILE MODAL -->
+<div class="moverlay" id="profile-modal" style="display:none">
+  <div class="modal">
+    <h3>Perfil <button class="mclose" onclick="closeM('profile-modal')">×</button></h3>
+    <div class="profile-hdr" id="profile-hdr"></div>
+    <div class="profile-tabs">
+      <button class="profile-tab active" onclick="switchProfileTab('day',this)">Hoje</button>
+      <button class="profile-tab" onclick="switchProfileTab('week',this)">Semana</button>
+      <button class="profile-tab" onclick="switchProfileTab('month',this)">Mês</button>
+      <button class="profile-tab" onclick="switchProfileTab('seals',this)">Selos</button>
+    </div>
+    <div id="profile-content"></div>
+  </div>
+</div>
+
+<!-- TROCA MODAL -->
+<div class="moverlay" id="troca-modal" style="display:none">
+  <div class="modal">
+    <h3>🎁 Trocar Selos <button class="mclose" onclick="closeM('troca-modal')">×</button></h3>
+    <p style="font-size:12px;color:#888;margin-bottom:1rem">Você tem <strong id="troca-count">0</strong> selos Chef. Escolha seu bônus:</p>
+    <div id="troca-options"></div>
+    <button class="btn2" onclick="closeM('troca-modal')">Cancelar</button>
+  </div>
+</div>
+
+</body>-- Tabela de logs do Mestre Cuca
+create table cuca_logs (
+  id bigserial primary key,
+  player_id text references players(id),
+  type text not null,
+  dish text,
+  pts integer default 0,
+  done_date text not null,
+  is_duo boolean default false,
+  partner_id text,
+  photo_url text,
+  created_at timestamp default now()
 );
+create policy "public_all" on cuca_logs for all using (true) with check (true);
+alter table cuca_logs enable row level security;
 
-const PLAYERS_DEF=[
-  {id:'bel',  name:'Bel',  emoji:'🧁',color:'#E88080',bg:'#FFEBEB',wawa:false},
-  {id:'gabil',name:'Gabil',emoji:'⚽',color:'#6A9E6A',bg:'#F0F7F0',wawa:false},
-  {id:'nho',  name:'Nhó',  emoji:'🌸',color:'#E8956D',bg:'#FFF4EC',wawa:false},
-  {id:'wawa', name:'Wawa', emoji:'🌙',color:'#8A6AAE',bg:'#F5EEFF',wawa:true},
-  {id:'pepe', name:'Pepe', emoji:'🔥',color:'#C4613A',bg:'#FFF8F0',wawa:false},
-];
+-- Adicionar colunas novas na tabela players
+alter table players add column if not exists password_hash text;
+alter table players add column if not exists chef_seals integer default 0;
 
-const TASKS=[
-  {id:'lixo1',name:'Tirar lixo da cozinha',cat:'lixo',pts:10,icon:'🗑️',type:'normal'},
-  {id:'lixo2',name:'Tirar lixo do banheiro social',cat:'lixo',pts:8,icon:'🗑️',type:'normal'},
-  {id:'lixo3',name:'Tirar lixo do banheiro da suíte',cat:'lixo',pts:8,icon:'🗑️',type:'normal'},
-  {id:'lixo4',name:'Descer com o lixo',cat:'lixo',pts:15,icon:'🛗',type:'normal'},
-  {id:'lixo5',name:'Trocar saco do lixo',cat:'lixo',pts:5,icon:'🗑️',type:'normal'},
-  {id:'coz1',name:'Lavar a louça',cat:'cozinha',pts:20,icon:'🍽️',type:'normal'},
-  {id:'coz2',name:'Secar e guardar a louça',cat:'cozinha',pts:10,icon:'🍽️',type:'normal'},
-  {id:'coz3',name:'Limpar o fogão',cat:'cozinha',pts:15,icon:'🔥',type:'normal'},
-  {id:'coz4',name:'Limpar a pia da cozinha',cat:'cozinha',pts:10,icon:'🚿',type:'normal'},
-  {id:'coz5',name:'Organizar a geladeira',cat:'cozinha',pts:50,icon:'🧊',type:'rare'},
-  {id:'coz6',name:'Limpar o micro-ondas',cat:'cozinha',pts:35,icon:'📦',type:'rare'},
-  {id:'coz7',name:'Organizar os armários',cat:'cozinha',pts:60,icon:'🗄️',type:'rare'},
-  {id:'limp1',name:'Passar aspirador (sala)',cat:'limpeza',pts:20,icon:'🌀',type:'normal'},
-  {id:'limp2',name:'Passar aspirador (quartos)',cat:'limpeza',pts:15,icon:'🌀',type:'normal'},
-  {id:'limp3',name:'Passar pano no chão',cat:'limpeza',pts:25,icon:'🧹',type:'normal'},
-  {id:'limp4',name:'Limpar banheiro social',cat:'limpeza',pts:70,icon:'🚿',type:'normal'},
-  {id:'limp5',name:'Limpar banheiro da suíte',cat:'limpeza',pts:70,icon:'🛁',type:'normal'},
-  {id:'limp6',name:'Limpar espelhos',cat:'limpeza',pts:30,icon:'🪞',type:'normal'},
-  {id:'limp7',name:'Tirar pó dos móveis',cat:'limpeza',pts:15,icon:'✨',type:'normal'},
-  {id:'qua1',name:'Fazer a cama',cat:'quartos',pts:10,icon:'🛏️',type:'normal'},
-  {id:'qua2',name:'Organizar o guarda-roupa',cat:'quartos',pts:50,icon:'👔',type:'rare'},
-  {id:'qua3',name:'Trocar roupa de cama',cat:'quartos',pts:20,icon:'🛏️',type:'normal'},
-  {id:'lav1',name:'Colocar roupa na máquina',cat:'lavanderia',pts:10,icon:'👕',type:'normal'},
-  {id:'lav2',name:'Retirar da máquina e dobrar',cat:'lavanderia',pts:15,icon:'👕',type:'normal'},
-  {id:'lav3',name:'Guardar roupa no lugar',cat:'lavanderia',pts:10,icon:'👔',type:'normal'},
-  {id:'com1',name:'Ir ao mercado',cat:'compras',pts:30,icon:'🛒',type:'normal'},
-  {id:'com2',name:'Guardar as compras',cat:'compras',pts:40,icon:'🛒',type:'rare'},
-  {id:'sac1',name:'Limpar e organizar a sacada',cat:'sacada',pts:30,icon:'🌿',type:'normal'},
-  {id:'sac2',name:'Encher a fonte da sacada',cat:'sacada',pts:35,icon:'⛲',type:'rare'},
-  {id:'agua1',name:'Encher garrafa 1',cat:'agua',pts:10,icon:'💧',type:'normal'},
-  {id:'agua2',name:'Encher garrafa 2',cat:'agua',pts:10,icon:'💧',type:'normal'},
-];
-
-const LIXO_CHAIN=[
-  {name:'Duplo Lixo',tasks:['lixo2','lixo3'],mult:1.2},
-  {name:'Trio Lixo',tasks:['lixo1','lixo2','lixo3'],mult:1.5},
-  {name:'Lixo Total',tasks:['lixo1','lixo2','lixo3','lixo5','lixo4'],mult:2},
-];
-const COMBOS=[
-  {name:'Duplo Lixo',tasks:['lixo2','lixo3'],mult:1.2,lbl:'x1,2',icon:'🗑️',desc:'Lixo dos 2 banheiros'},
-  {name:'Trio Lixo',tasks:['lixo1','lixo2','lixo3'],mult:1.5,lbl:'x1,5',icon:'🗑️',desc:'Lixo cozinha + 2 banheiros'},
-  {name:'Lixo Total',tasks:['lixo1','lixo2','lixo3','lixo5','lixo4'],mult:2,lbl:'x2',icon:'🗑️',desc:'Trio lixo + trocar saco + descer'},
-  {name:'Cozinha Brilhando',tasks:['coz1','coz3','coz4','coz6'],mult:3,lbl:'x3',icon:'🍽️',desc:'Louça + fogão + pia + micro-ondas'},
-  {name:'Banheiro Impecável',tasks:['limp4','limp6'],mult:2,lbl:'x2',icon:'🚿',desc:'Limpar banheiro + espelho'},
-  {name:'Dia de Faxina',tasks:['limp1','limp3','limp7'],mult:3,lbl:'x3',icon:'🧹',desc:'Aspirador + pano + tirar pó'},
-  {name:'Lavanderia Completa',tasks:['lav1','lav2','lav3'],mult:2,lbl:'x2',icon:'👕',desc:'Colocar + retirar + guardar'},
-];
-const GUARDIANS=['bel','gabil','nho','pepe'];
-const NEG_SEALS_DEF=[
-  {id:'contestador',emoji:'🚩',name:'Contestador Injusto',desc:'Perdeu 2+ contestações',penalty:'-30% por 7 dias'},
-  {id:'bagunceiro',emoji:'👟',name:'Bagunçeiro',desc:'Roupas/sapatos espalhados',penalty:'-10% por 7 dias'},
-  {id:'dorminhoco',emoji:'🐌',name:'Dorminhoco',desc:'5 dias sem tarefa',penalty:'-20% por 7 dias'},
-  {id:'sumido',emoji:'👻',name:'Sumido',desc:'7 dias sem tarefa',penalty:'-40% por 7 dias'},
-  {id:'descuidado',emoji:'🗑️',name:'Descuidado',desc:'Tarefa contestada confirmada',penalty:'-15% por 7 dias'},
-  {id:'geladeira',emoji:'🥘',name:'Geladeira Criativa',desc:'Panela na geladeira',penalty:'-10% por 7 dias'},
-  {id:'sedento',emoji:'🏜️',name:'Guardião Sedento',desc:'Garrafa não reposta em 30 min',penalty:'-15% por 7 dias'},
-];
-const POS_SEALS=[
-  {emoji:'🔥',name:'Sequência',desc:'Tarefas X dias seguidos'},
-  {emoji:'👑',name:'Liderança mensal',desc:'Maior pontuação do mês'},
-  {emoji:'🤝',name:'Espírito de equipe',desc:'Nunca contestou injustamente'},
-  {emoji:'⚡',name:'Combo Master',desc:'X combos em um mês'},
-  {emoji:'🌟',name:'Novato dedicado',desc:'Primeiros selos conquistados'},
-  {emoji:'⭐',name:'Doméstica Rainha',desc:'3 itens raros no mês (+150 pts)'},
-  {emoji:'👑',name:'Lendária',desc:'Todos os itens raros (+300 pts)'},
-];
-
-let players=[], waterGuardian=null, waterInterval=null, waterStartTime=null;
-let photoState={}, photoFiles={}, selPlayer=null, selTask=null;
-let contestReporter=null, contestAccused=null;
-let todayLogs=[], activeSeals=[], contests=[], pollData=[], pollVotes=[];
-
-const today=()=>new Date().toISOString().split('T')[0];
-const now=()=>Date.now();
-const monthStr=()=>{const m=new Date();return m.toLocaleDateString('pt-BR',{month:'long',year:'numeric'});};
-
-async function init(){
-  await loadAll();
-  setInterval(loadAll,30000);
-}
-
-async function loadAll(){
-  await Promise.all([loadPlayers(),loadTodayLogs(),loadWater(),loadSeals(),loadContests(),loadPoll()]);
-  renderDashboard();
-}
-
-async function loadPlayers(){
-  const{data}=await SB.from('players').select('*').order('pts',{ascending:false});
-  if(data)players=data.map(p=>{
-    const def=PLAYERS_DEF.find(d=>d.id===p.id);
-    return {...p, emoji:def?.emoji||p.emoji, color:def?.color||p.color, bg:def?.bg||p.bg, wawa:def?.wawa||p.wawa};
-  });
-}
-
-async function loadTodayLogs(){
-  const{data}=await SB.from('task_logs').select('*').eq('done_date',today());
-  if(data)todayLogs=data;
-}
-
-async function loadWater(){
-  const{data}=await SB.from('water_guardian').select('*').eq('id',1).single();
-  if(data){
-    waterGuardian=data;
-    if(data.water_empty&&data.water_empty_time&&!waterInterval){
-      waterStartTime=new Date(data.water_empty_time).getTime();
-      startWaterTimer();
-    }
-  }
-}
-
-async function loadSeals(){
-  const{data}=await SB.from('active_seals').select('*').gt('expires_at',new Date().toISOString());
-  if(data)activeSeals=data;
-}
-
-async function loadContests(){
-  const{data}=await SB.from('contests').select('*').in('status',['defense','voting']).order('created_at',{ascending:false});
-  if(data)contests=data;
-}
-
-async function loadPoll(){
-  const mn=today().slice(0,7);
-  const{data:opts}=await SB.from('poll').select('*').eq('month',mn);
-  const{data:votes}=await SB.from('poll_votes').select('*').eq('month',mn);
-  if(opts)pollData=opts;
-  if(votes)pollVotes=votes;
-  if(opts&&opts.length===0){
-    await SB.from('poll').insert([
-      {option_text:'Jantar em restaurante especial',votes:0,month:mn},
-      {option_text:'Cinema + pipoca para todos',votes:0,month:mn},
-      {option_text:'Dia de spa/massagem',votes:0,month:mn},
-      {option_text:'Passeio surpresa em família',votes:0,month:mn},
-    ]);
-    loadPoll();
-  }
-}
-
-function renderDashboard(){
-  const mn=monthStr();
-  document.getElementById('month-lbl').textContent='Jogo cooperativo · '+mn.charAt(0).toUpperCase()+mn.slice(1);
-  document.getElementById('team-month').textContent=mn.charAt(0).toUpperCase()+mn.slice(1);
-  // CORRIGIDO: soma apenas pts, sem duplicar
-  const total=players.reduce((s,p)=>s+(p.pts||0),0);
-  document.getElementById('team-prog').style.width=Math.min(100,total/4000*100)+'%';
-  document.getElementById('team-pts-lbl').textContent=total.toLocaleString()+' pts';
-  renderWater();
-  if(players.length){
-    document.getElementById('players-loading').style.display='none';
-    document.getElementById('pgrid').style.display='grid';
-    document.getElementById('pgrid').innerHTML=players.map(p=>{
-      const seals=activeSeals.filter(s=>s.player_id===p.id);
-      const sealStr=seals.map(s=>NEG_SEALS_DEF.find(d=>d.id===s.seal_id)?.emoji||'').join('');
-      return `<div class="pcard${p.wawa?' wawa':''}${seals.length?' neg':''}">
-        ${sealStr?`<span class="nseal">${sealStr}</span>`:''}
-        ${p.wawa?'<span class="mtag">2x fds</span>':''}
-        <div class="av" style="background:${p.bg};color:${p.color}">${p.emoji}</div>
-        <div class="pname">${p.name}</div>
-        <div class="ppts">${(p.pts||0).toLocaleString()}</div>
-        <div class="pbadge">pontos</div>
-      </div>`;
-    }).join('');
-  }
-}
-
-function renderWater(){
-  if(!waterGuardian)return;
-  const def=PLAYERS_DEF.find(d=>d.id===waterGuardian.guardian_id);
-  const g=players.find(p=>p.id===waterGuardian.guardian_id)||def;
-  document.getElementById('water-name').textContent='Guardiã da semana: '+(g?.name||'—');
-  const card=document.getElementById('water-card');
-  const timer=document.getElementById('water-timer');
-  if(!waterGuardian.water_empty){
-    timer.textContent='';card.classList.remove('alert');
-  }
-}
-
-function startWaterTimer(){
-  if(waterInterval)clearInterval(waterInterval);
-  waterStartTime=waterStartTime||now();
-  waterInterval=setInterval(async()=>{
-    if(!waterGuardian?.water_empty){
-      clearInterval(waterInterval);waterInterval=null;
-      document.getElementById('water-timer').textContent='';
-      document.getElementById('water-card').classList.remove('alert');
-      return;
-    }
-    const elapsed=now()-waterStartTime;
-    const rem=Math.max(0,30*60*1000-elapsed);
-    const card=document.getElementById('water-card');
-    const timer=document.getElementById('water-timer');
-    if(rem>0){
-      const mins=Math.floor(rem/60000);
-      const secs=Math.floor((rem%60000)/1000);
-      timer.textContent=`⏱️ ${mins}:${secs.toString().padStart(2,'0')} restantes`;
-      card.classList.add('alert');
-    } else {
-      timer.textContent='⛔ Prazo esgotado!';
-      card.classList.add('alert');
-      if(!waterGuardian.seal_applied){
-        const g=players.find(p=>p.id===waterGuardian.guardian_id);
-        if(g&&!g.wawa){
-          const expires=new Date(now()+7*24*60*60*1000).toISOString();
-          await SB.from('active_seals').insert({player_id:g.id,seal_id:'sedento',expires_at:expires});
-          await SB.from('water_guardian').update({seal_applied:true}).eq('id',1);
-          waterGuardian.seal_applied=true;
-          showToast('🏜️ '+g.name+' recebeu o selo Guardião Sedento!');
-          loadSeals();
-        }
-      }
-    }
-  },1000);
-}
-
-async function reportEmpty(){
-  if(waterGuardian?.water_empty){showToast('Garrafa já foi reportada como vazia!');return;}
-  const t=new Date().toISOString();
-  await SB.from('water_guardian').update({water_empty:true,water_empty_time:t,seal_applied:false}).eq('id',1);
-  waterGuardian={...waterGuardian,water_empty:true,water_empty_time:t,seal_applied:false};
-  waterStartTime=now();
-  startWaterTimer();
-  showToast('🚨 Garrafa reportada vazia! Guardião tem 30 min.');
-}
-
-async function reportRefill(){
-  if(!waterGuardian?.water_empty){showToast('Garrafa não estava reportada como vazia.');return;}
-  const g=players.find(p=>p.id===waterGuardian.guardian_id);
-  const elapsed=now()-waterStartTime;
-  const withinTime=elapsed<30*60*1000;
-  await SB.from('water_guardian').update({water_empty:false,water_empty_time:null,seal_applied:false}).eq('id',1);
-  waterGuardian={...waterGuardian,water_empty:false,water_empty_time:null};
-  waterStartTime=null;
-  if(waterInterval){clearInterval(waterInterval);waterInterval=null;}
-  document.getElementById('water-timer').textContent='';
-  document.getElementById('water-card').classList.remove('alert');
-  if(withinTime&&g){
-    await SB.from('players').update({pts:(g.pts||0)+10}).eq('id',g.id);
-    showToast('✅ '+g.name+' reabasteceu a tempo! +10 pts bônus 💧');
-  } else showToast('✅ Garrafa reabastecida.');
-  loadPlayers().then(renderDashboard);
-}
-
-async function nextGuardian(){
-  const curr=GUARDIANS.indexOf(waterGuardian?.guardian_id||'bel');
-  const next=GUARDIANS[(curr+1)%GUARDIANS.length];
-  if(waterInterval){clearInterval(waterInterval);waterInterval=null;}
-  waterStartTime=null;
-  await SB.from('water_guardian').update({guardian_id:next,water_empty:false,water_empty_time:null,seal_applied:false,week_start:today()}).eq('id',1);
-  await loadWater();renderDashboard();
-  const g=PLAYERS_DEF.find(p=>p.id===next);
-  showToast('Semana nova! Guardião: '+(g?.name||next)+' 💧');
-}
-
-function renderTasks(filter='all'){
-  const list=filter==='all'?TASKS:TASKS.filter(t=>t.cat===filter);
-  document.getElementById('tlist').innerHTML=list.map(t=>{
-    const doneBy=todayLogs.filter(l=>l.task_id===t.id).map(l=>players.find(p=>p.id===l.player_id)?.name||l.player_id);
-    return `<div class="titem${t.type==='rare'?' rare':''}" onclick="quickReg('${t.id}')">
-      <div class="ticon">${t.icon}</div>
-      <div class="tinfo">
-        <div class="tname">${t.name}${t.type==='rare'?'<span class="rbadge">RARO</span>':''}</div>
-        <div class="tmeta">${t.cat.charAt(0).toUpperCase()+t.cat.slice(1)}</div>
-        ${doneBy.length?`<div class="tdone">✓ ${doneBy.join(', ')} hoje</div>`:''}
-      </div>
-      <div class="tpts">${t.pts} pts</div>
-    </div>`;
-  }).join('');
-}
-
-function filterT(cat,btn){
-  document.querySelectorAll('.tfilt button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');renderTasks(cat);
-}
-
-function renderCombos(){
-  let html='<p style="font-size:12px;color:#888;margin-bottom:10px">Combos calculados sobre a soma das tarefas. Combos de lixo se acumulam.</p>';
-  let acc=0;
-  LIXO_CHAIN.forEach(c=>{
-    const base=c.tasks.reduce((s,tid)=>{const t=TASKS.find(x=>x.id===tid);return s+(t?t.pts:0);},0);
-    const total=Math.round(base*c.mult);acc+=total;
-    const co=COMBOS.find(x=>x.name===c.name);
-    html+=`<div class="ccard"><span class="cmult">${co.lbl} = ${total} pts</span><div class="cname">${co.icon} ${co.name}</div><div class="ctasks">${co.desc}</div></div>`;
-  });
-  html+=`<div style="background:var(--w1);border:.5px solid var(--w3);border-radius:8px;padding:7px 10px;font-size:11px;color:var(--w5);margin-bottom:10px">Total acumulado Lixo Total: <strong>${acc} pts</strong></div>`;
-  COMBOS.filter(c=>!LIXO_CHAIN.find(l=>l.name===c.name)).forEach(c=>{
-    const base=c.tasks.reduce((s,tid)=>{const t=TASKS.find(x=>x.id===tid);return s+(t?t.pts:0);},0);
-    html+=`<div class="ccard"><span class="cmult">${c.lbl} = ${Math.round(base*c.mult)} pts</span><div class="cname">${c.icon} ${c.name}</div><div class="ctasks">${c.desc} (base: ${base} pts)</div></div>`;
-  });
-  html+=`
-    <div class="ccard" style="border-color:var(--gold);background:#FFFBEC;margin-top:10px"><span class="cmult" style="color:#7A5500">+150 pts</span><div class="cname">⭐ Doméstica Rainha</div><div class="ctasks">3 itens raros no mês + selo</div></div>
-    <div class="ccard" style="border-color:var(--w4);background:var(--w1)"><span class="cmult" style="color:#7A5500">+300 pts</span><div class="cname">👑 Lendária</div><div class="ctasks">Todos os itens raros + selo</div></div>`;
-  document.getElementById('clist').innerHTML=html;
-}
-
-function renderSeals(){
-  document.getElementById('pos-seals').innerHTML=POS_SEALS.map(s=>`<div class="scard"><div class="semoji">${s.emoji}</div><div class="sname">${s.name}</div><div class="sdesc">${s.desc}</div></div>`).join('');
-  let activeHtml='';
-  activeSeals.forEach(s=>{
-    const def=NEG_SEALS_DEF.find(d=>d.id===s.seal_id);
-    const p=players.find(x=>x.id===s.player_id);
-    if(!def||!p)return;
-    const rem=Math.ceil((new Date(s.expires_at)-new Date())/(1000*60*60*24));
-    activeHtml+=`<div class="scard neg" style="margin-bottom:6px"><div class="semoji">${def.emoji}</div><div class="sname">${p.name}: ${def.name}</div><div class="spen">${def.penalty} · ${rem} dias restantes</div></div>`;
-  });
-  document.getElementById('neg-active').innerHTML=activeHtml||'<p style="font-size:12px;color:#888">Nenhum selo negativo ativo! 🎉</p>';
-  document.getElementById('neg-seals').innerHTML=NEG_SEALS_DEF.map(s=>`<div class="scard neg"><div class="semoji">${s.emoji}</div><div class="sname">${s.name}</div><div class="sdesc">${s.desc}</div><div class="spen">${s.penalty}</div></div>`).join('');
-}
-
-function renderContests(){
-  const el=document.getElementById('ctest-list');
-  if(!contests.length){el.innerHTML='<div style="text-align:center;padding:2rem;color:#888;font-size:12px">Nenhuma contestação ativa 🎉</div>';return;}
-  el.innerHTML=contests.map(c=>{
-    const elapsed=now()-new Date(c.created_at).getTime();
-    const inDefense=elapsed<24*60*60*1000;
-    const rem=Math.max(0,Math.ceil((24*60*60*1000-elapsed)/3600000));
-    const rep=players.find(p=>p.id===c.reporter_id);
-    const acc=players.find(p=>p.id===c.accused_id);
-    return `<div class="citem">
-      <div class="chdr">
-        <div class="ctitle">${rep?.name||'?'} × ${acc?.name||'?'}: ${c.type}</div>
-        <span class="cstat ${inDefense?'sdefense':'svoting'}">${inDefense?'Defesa ('+rem+'h)':'Votação'}</span>
-      </div>
-      ${c.defense?`<div style="font-size:11px;background:#f5f5f5;padding:5px 8px;border-radius:6px;margin-bottom:5px;color:#666">Defesa: "${c.defense}"</div>`:''}
-      ${!inDefense?`<div class="vbtns">
-        <button class="vbtn vvalid" onclick="castContestVote(${c.id},'valid')">✓ Válida (${c.votes_valid})</button>
-        <button class="vbtn vinvalid" onclick="castContestVote(${c.id},'invalid')">✗ Injusta (${c.votes_invalid})</button>
-      </div>`:''}
-      ${inDefense&&!c.defense?`<button class="btn2" style="margin-top:5px;padding:6px;font-size:11px" onclick="submitDefense(${c.id})">Apresentar defesa</button>`:''}
-    </div>`;
-  }).join('');
-}
-
-function renderPoll(){
-  const mn=today().slice(0,7);
-  const nextDate=new Date();nextDate.setMonth(nextDate.getMonth()+1);
-  const nextStr=nextDate.toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
-  document.getElementById('poll-title').textContent='Premiação de '+nextStr.charAt(0).toUpperCase()+nextStr.slice(1);
-  const myVote=pollVotes.find(v=>v.player_id===selPlayer);
-  document.getElementById('poll-sub').textContent=myVote?'Você já votou! Resultado parcial:':'Vote na premiação do próximo mês.';
-  const total=pollData.reduce((s,o)=>s+(o.votes||0),0);
-  document.getElementById('poll-opts').innerHTML=pollData.map(o=>{
-    const pct=total?Math.round((o.votes||0)/total*100):0;
-    return `<div class="popt${myVote?' voted':''}" onclick="castPoll(${o.id})">
-      <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:#333">${o.option_text}</span><span style="font-size:11px;color:#888">${pct}%</span></div>
-      <div class="pbar"><div class="pfill" style="width:${pct}%"></div></div>
-    </div>`;
-  }).join('');
-}
-
-function showSec(id,btn){
-  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  if(btn)btn.classList.add('active');
-  if(id==='tasks')renderTasks();
-  if(id==='combos')renderCombos();
-  if(id==='seals'){loadSeals().then(renderSeals);}
-  if(id==='contests'){loadContests().then(renderContests);}
-  if(id==='poll'){loadPoll().then(renderPoll);}
-}
-
-// CORRIGIDO: foto obrigatória de verdade — abre câmera
-function simPhoto(id){
-  const input=document.createElement('input');
-  input.type='file';input.accept='image/*';input.capture='environment';
-  input.onchange=()=>{
-    if(input.files&&input.files[0]){
-      photoState[id]=true;
-      photoFiles[id]=input.files[0];
-      const a=document.getElementById(id);
-      a.className='photo ok';
-      const reader=new FileReader();
-      reader.onload=(e)=>{
-        a.innerHTML=`<img src="${e.target.result}" style="width:100%;max-height:120px;object-fit:cover;border-radius:8px;margin-bottom:4px"><p style="font-size:11px;color:#3D6B3D;font-weight:600">✅ Foto adicionada!</p>`;
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  };
-  input.click();
-}
-
-function resetPhoto(id){
-  photoState[id]=false;
-  photoFiles[id]=null;
-  const a=document.getElementById(id);
-  a.className='photo';
-  a.innerHTML='<div style="font-size:20px;margin-bottom:3px">📷</div><p style="font-size:12px;color:#888">Toque para adicionar foto</p><p style="font-size:10px;color:#aaa;margin-top:1px">(obrigatório)</p>';
-}
-
-function openTaskModal(){
-  selPlayer=null;selTask=null;resetPhoto('photo-task');
-  document.getElementById('cprev').style.display='none';
-  document.getElementById('modal-players').innerHTML=players.map(p=>`<button class="pbtn" onclick="selP('${p.id}',this,'modal-players')">${p.emoji} ${p.name}${p.wawa?' (2x)':''}</button>`).join('');
-  const sel=document.getElementById('tsel');
-  sel.innerHTML='<option value="">Escolha uma tarefa...</option>'+TASKS.map(t=>`<option value="${t.id}">${t.icon} ${t.name} — ${t.pts} pts</option>`).join('');
-  sel.onchange=()=>{selTask=sel.value;checkCprev();};
-  document.getElementById('task-modal').style.display='flex';
-}
-
-function selP(id,btn,group){
-  if(group==='modal-players')selPlayer=id;
-  else if(group==='c-reporter')contestReporter=id;
-  else if(group==='c-accused')contestAccused=id;
-  document.querySelectorAll('#'+group+' .pbtn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-}
-
-function checkCprev(){
-  if(!selTask)return;
-  const combo=COMBOS.find(c=>c.tasks.includes(selTask));
-  const prev=document.getElementById('cprev');
-  if(combo){prev.style.display='block';prev.textContent='⚡ Combo possível: '+combo.name+' ('+combo.lbl+')';}
-  else prev.style.display='none';
-}
-
-async function submitTask(){
-  if(!selPlayer){showToast('Selecione quem está registrando!');return;}
-  if(!selTask){showToast('Selecione uma tarefa!');return;}
-  if(!photoState['photo-task']){showToast('Foto obrigatória! Tire uma foto da tarefa.');return;}
-  const already=todayLogs.find(l=>l.player_id===selPlayer&&l.task_id===selTask);
-  if(already){showToast('Você já registrou essa tarefa hoje!');return;}
-  const t=TASKS.find(x=>x.id===selTask);
-  const p=players.find(x=>x.id===selPlayer);
-  const doneTodayIds=todayLogs.filter(l=>l.player_id===selPlayer).map(l=>l.task_id);
-  doneTodayIds.push(selTask);
-  const wawaMult=p.wawa?2:1;
-  let base=t.pts*wawaMult;
-  let bonus=0;let comboName=null;
-  const lixoIds=['lixo1','lixo2','lixo3','lixo4','lixo5'];
-  if(lixoIds.includes(selTask)){
-    LIXO_CHAIN.forEach(c=>{
-      if(c.tasks.every(tid=>doneTodayIds.includes(tid))){
-        const s=c.tasks.reduce((acc,tid)=>{const tk=TASKS.find(x=>x.id===tid);return acc+(tk?tk.pts:0);},0);
-        bonus+=Math.round(s*c.mult);comboName='Combo Lixo';
-      }
-    });
-  } else {
-    const combo=COMBOS.filter(c=>!LIXO_CHAIN.find(l=>l.name===c.name)).find(c=>c.tasks.every(tid=>doneTodayIds.includes(tid)));
-    if(combo){const s=combo.tasks.reduce((acc,tid)=>{const tk=TASKS.find(x=>x.id===tid);return acc+(tk?tk.pts:0);},0);bonus=Math.round(s*combo.mult);comboName=combo.name;}
-  }
-  const total=base+bonus;
-  await SB.from('task_logs').insert({player_id:selPlayer,task_id:selTask,task_name:t.name,pts:total,done_date:today(),combo_name:comboName,combo_bonus:bonus,photo_url:'uploaded'});
-  await SB.from('players').update({pts:(p.pts||0)+total}).eq('id',selPlayer);
-  closeM('task-modal');
-  await loadAll();
-  if(comboName)triggerCombo(comboName,total);
-  else{showToast('+'+total+' pts para '+p.name+'! '+t.icon);floatPts(total);}
-}
-
-function quickReg(taskId){
-  openTaskModal();
-  setTimeout(()=>{const sel=document.getElementById('tsel');sel.value=taskId;selTask=taskId;checkCprev();},80);
-}
-
-function openContestModal(){
-  contestReporter=null;contestAccused=null;resetPhoto('photo-contest');
-  document.getElementById('c-reporter').innerHTML=players.map(p=>`<button class="pbtn" onclick="selP('${p.id}',this,'c-reporter')">${p.emoji} ${p.name}</button>`).join('');
-  document.getElementById('c-accused').innerHTML=players.map(p=>`<button class="pbtn" onclick="selP('${p.id}',this,'c-accused')">${p.emoji} ${p.name}</button>`).join('');
-  document.getElementById('contest-modal').style.display='flex';
-}
-
-async function submitContest(){
-  if(!contestReporter){showToast('Selecione quem está contestando!');return;}
-  if(!contestAccused){showToast('Selecione quem está sendo contestado!');return;}
-  if(contestReporter===contestAccused){showToast('Você não pode se contestar!');return;}
-  if(!photoState['photo-contest']){showToast('Foto obrigatória como evidência!');return;}
-  await SB.from('contests').insert({reporter_id:contestReporter,accused_id:contestAccused,type:document.getElementById('ctype').value,status:'defense',votes_valid:0,votes_invalid:0,photo_url:'uploaded'});
-  closeM('contest-modal');
-  await loadContests();renderContests();
-  showSec('contests',document.querySelectorAll('.nav button')[4]);
-  showToast('Contestação enviada! Acusado tem 24h para se defender.');
-}
-
-async function submitDefense(id){
-  const defense=prompt('Digite sua defesa:');
-  if(!defense)return;
-  await SB.from('contests').update({defense,status:'voting'}).eq('id',id);
-  await loadContests();renderContests();
-  showToast('Defesa registrada! Equipe vai votar.');
-}
-
-async function castContestVote(id,type){
-  const c=contests.find(x=>x.id===id);
-  if(!c)return;
-  const newValid=type==='valid'?c.votes_valid+1:c.votes_valid;
-  const newInvalid=type==='invalid'?c.votes_invalid+1:c.votes_invalid;
-  await SB.from('contests').update({votes_valid:newValid,votes_invalid:newInvalid}).eq('id',id);
-  const total=newValid+newInvalid;
-  if(total>=3){
-    const expires=new Date(now()+7*24*60*60*1000).toISOString();
-    if(newInvalid>=2){
-      await SB.from('active_seals').insert({player_id:c.reporter_id,seal_id:'contestador',expires_at:expires});
-      await SB.from('contests').update({status:'closed'}).eq('id',id);
-      showToast('🚩 Contestação injusta! '+players.find(p=>p.id===c.reporter_id)?.name+' recebe selo.');
-    } else {
-      await SB.from('active_seals').insert({player_id:c.accused_id,seal_id:'descuidado',expires_at:expires});
-      await SB.from('contests').update({status:'closed'}).eq('id',id);
-      showToast('✓ Contestação válida! '+players.find(p=>p.id===c.accused_id)?.name+' recebe selo.');
-    }
-  } else showToast(type==='valid'?'Voto: Válida ✓':'Voto: Injusta ✗');
-  await loadContests();renderContests();
-}
-
-async function castPoll(optId){
-  if(!selPlayer){showToast('Selecione seu personagem no início!');return;}
-  const mn=today().slice(0,7);
-  const myVote=pollVotes.find(v=>v.player_id===selPlayer&&v.month===mn);
-  if(myVote){showToast('Você já votou este mês!');return;}
-  const opt=pollData.find(o=>o.id===optId);
-  if(!opt)return;
-  await SB.from('poll').update({votes:(opt.votes||0)+1}).eq('id',optId);
-  await SB.from('poll_votes').insert({player_id:selPlayer,poll_id:optId,month:mn});
-  await loadPoll();renderPoll();
-  showToast('Voto registrado! 🗳️');
-}
-
-async function suggestPoll(){
-  const s=prompt('Sugira uma premiação:');
-  if(!s)return;
-  const mn=today().slice(0,7);
-  await SB.from('poll').insert({option_text:s,votes:0,month:mn});
-  await loadPoll();renderPoll();
-  showToast('Sugestão adicionada! 🎉');
-}
-
-function closeM(id){document.getElementById(id).style.display='none';}
-
-function showToast(msg){
-  const t=document.createElement('div');t.className='toast';t.textContent=msg;
-  document.body.appendChild(t);
-  setTimeout(()=>{t.style.animation='tout .3s ease forwards';setTimeout(()=>t.remove(),300);},3200);
-}
-
-function floatPts(pts){
-  const el=document.createElement('div');el.className='panim';el.textContent='+'+pts+' pts';
-  el.style.left='50%';el.style.top='40%';document.body.appendChild(el);
-  setTimeout(()=>el.remove(),1500);
-}
-
-function triggerCombo(name,pts){showToast('⚡ COMBO: '+name+' — +'+pts+' pts!');floatPts(pts);}
-
-init();
-</script>
-</body>
-</html>
+-- Adicionar coluna reason na tabela contests
+alter table contests add column if not exists reason text;
