@@ -17,38 +17,6 @@ body{background:#f5f0ea;min-height:100vh}
 .nav button{padding:6px 12px;border-radius:20px;border:.5px solid #ddd;background:#fff;color:#888;font-size:12px;cursor:pointer;white-space:nowrap}
 .nav button.active{background:var(--w2);color:var(--w5);border-color:var(--w3);font-weight:600}
 .sec{display:none}.sec.active{display:block}
-.leg-card{background:linear-gradient(135deg,#FFF8E1,#FFF3CC);border:1.5px solid var(--gold);border-radius:16px;margin-bottom:1rem;overflow:hidden}
-.leg-hdr{padding:12px 16px 8px;display:flex;align-items:center;gap:10px}
-.leg-title{font-size:15px;font-weight:600;color:#7A5500}
-.leg-sub{font-size:11px;color:#A07800;margin-top:2px}
-.scene{position:relative;background:linear-gradient(180deg,#c8d8f0 58%,#b8d888 58%,#a0c870 100%);height:100px;overflow:hidden}
-.ds-sun{position:absolute;top:10px;right:20px;width:18px;height:18px;background:#FFD700;border-radius:2px;box-shadow:0 0 0 3px #FFE44D}
-.cld{position:absolute;background:#fff;border-radius:20px;opacity:.85}
-.c1{width:44px;height:12px;top:12px;left:8%;animation:cl 14s linear infinite}
-.c2{width:28px;height:9px;top:20px;left:55%;animation:cl 20s linear infinite}
-@keyframes cl{from{left:-60px}to{left:110%}}
-.big-paw{position:absolute;bottom:16px;font-size:30px;animation:bw 4s linear infinite}
-@keyframes bw{0%{left:-50px;opacity:0}10%{opacity:1}85%{opacity:1}100%{left:calc(100% + 50px);opacity:0}}
-.pw-row{position:absolute;bottom:4px;left:0;width:200%;display:flex;gap:18px;align-items:flex-end;animation:pww 3.5s linear infinite}
-@keyframes pww{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.pw{display:flex;flex-direction:column;align-items:center;gap:2px;opacity:0;animation:pwf 3.5s ease-in-out infinite}
-.pw.alt{margin-bottom:4px}
-.pw:nth-child(1){animation-delay:0s}.pw:nth-child(2){animation-delay:.44s}.pw:nth-child(3){animation-delay:.88s}.pw:nth-child(4){animation-delay:1.31s}
-.pw:nth-child(5){animation-delay:1.75s}.pw:nth-child(6){animation-delay:2.19s}.pw:nth-child(7){animation-delay:2.63s}.pw:nth-child(8){animation-delay:3.06s}
-.pw:nth-child(9){animation-delay:0s}.pw:nth-child(10){animation-delay:.44s}.pw:nth-child(11){animation-delay:.88s}.pw:nth-child(12){animation-delay:1.31s}
-.pw:nth-child(13){animation-delay:1.75s}.pw:nth-child(14){animation-delay:2.19s}.pw:nth-child(15){animation-delay:2.63s}.pw:nth-child(16){animation-delay:3.06s}
-@keyframes pwf{0%,5%{opacity:0}25%{opacity:.7}65%{opacity:.35}100%{opacity:0}}
-.pw-toes{display:flex;gap:2px}.pw-toe{width:4px;height:4px;background:#3d2810;border-radius:50%}.pw-pad{width:10px;height:7px;background:#3d2810;border-radius:3px}
-.leg-stats{display:flex;gap:8px;padding:8px 14px}
-.leg-stat{flex:1;background:rgba(255,255,255,.7);border-radius:10px;padding:7px;text-align:center}
-.leg-stat-val{font-size:18px;font-weight:700;color:var(--w5)}
-.leg-stat-lbl{font-size:10px;color:#A07800;margin-top:1px}
-.stk-bar{margin:0 14px 8px;background:rgba(255,255,255,.5);border-radius:8px;padding:7px 10px}
-.stk-lbl{font-size:10px;color:#A07800;margin-bottom:5px}
-.stk-track{display:flex;gap:3px}
-.stk-day{width:26px;height:26px;border-radius:6px;background:rgba(200,180,100,.2);display:flex;align-items:center;justify-content:center;font-size:12px;border:1px solid rgba(245,200,66,.3)}
-.stk-day.done{background:var(--gold);border-color:#E6A800}
-.reg-btn{margin:0 14px 12px;width:calc(100% - 28px);padding:9px;background:var(--w5);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer}
 .water-card{border-radius:12px;padding:12px;margin-bottom:1rem;display:flex;align-items:center;gap:10px;border:.5px solid var(--w3);background:var(--w1)}
 .water-card.alert{background:#FFF0F0;border-color:#F09595;animation:pulse .8s ease-in-out infinite alternate}
 @keyframes pulse{from{box-shadow:0 0 0 0 rgba(240,149,149,.4)}to{box-shadow:0 0 0 6px rgba(240,149,149,0)}}
@@ -128,8 +96,6 @@ body{background:#f5f0ea;min-height:100vh}
 .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--w5);color:#fff;padding:11px 22px;border-radius:18px;font-size:13px;font-weight:500;z-index:200;animation:tin .3s ease;white-space:nowrap;pointer-events:none;max-width:90vw;text-align:center}
 @keyframes tin{from{opacity:0;transform:translateX(-50%) translateY(-20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 @keyframes tout{from{opacity:1}to{opacity:0;transform:translateX(-50%) translateY(-20px)}}
-.lflash{position:fixed;inset:0;background:radial-gradient(circle,rgba(245,200,66,.35),transparent);z-index:150;pointer-events:none;animation:fl .9s ease forwards}
-@keyframes fl{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
 .panim{position:fixed;pointer-events:none;font-size:22px;font-weight:700;color:var(--w5);z-index:300;animation:pf 1.5s ease forwards}
 @keyframes pf{0%{opacity:1;transform:translateY(0) translateX(-50%)}100%{opacity:0;transform:translateY(-70px) translateX(-50%)}}
 </style>
@@ -150,32 +116,6 @@ body{background:#f5f0ea;min-height:100vh}
     <button onclick="showSec('poll',this)">Premiação</button>
   </div>
   <div id="dashboard" class="sec active">
-    <div class="leg-card">
-      <div class="leg-hdr">
-        <div style="font-size:24px">🌟</div>
-        <div><div class="leg-title">Passear com a Amelie</div><div class="leg-sub">Item lendário · 100 pts por passeio</div></div>
-        <div style="margin-left:auto;text-align:right">
-          <div style="font-size:20px;font-weight:700;color:var(--w5)" id="leg-pts">-</div>
-          <div style="font-size:10px;color:#A07800">pts este mês</div>
-        </div>
-      </div>
-      <div class="scene">
-        <div class="ds-sun"></div>
-        <div class="cld c1"></div><div class="cld c2"></div>
-        <div class="big-paw">🐾</div>
-        <div class="pw-row" id="pw-row"></div>
-      </div>
-      <div class="leg-stats">
-        <div class="leg-stat"><div class="leg-stat-val" id="leg-count">-</div><div class="leg-stat-lbl">passeios</div></div>
-        <div class="leg-stat"><div class="leg-stat-val" id="leg-streak">-</div><div class="leg-stat-lbl">dias seguidos</div></div>
-        <div class="leg-stat"><div class="leg-stat-val" id="leg-miss">7</div><div class="leg-stat-lbl">pro selo 🐾</div></div>
-      </div>
-      <div class="stk-bar">
-        <div class="stk-lbl">Sequência — Guardiã da Amelie (7 dias)</div>
-        <div class="stk-track" id="stk-track"></div>
-      </div>
-      <button class="reg-btn" onclick="openAmelieModal()">+ Registrar passeio da Amelie</button>
-    </div>
     <div class="water-card" id="water-card">
       <div style="font-size:24px">💧</div>
       <div class="water-info">
@@ -200,7 +140,7 @@ body{background:#f5f0ea;min-height:100vh}
         <span>Meta: 3.500 <span style="color:var(--w4)">/ 4.000 desafio</span></span>
       </div>
     </div>
-    <div class="loading" id="players-loading"><div class="spinner"></div>Carregando jogadores...</div>
+    <div class="loading" id="players-loading"><div class="spinner"></div>Carregando...</div>
     <div class="pgrid" id="pgrid" style="display:none"></div>
     <button class="btn1" onclick="openTaskModal()" style="margin-top:.5rem">+ Registrar tarefa</button>
   </div>
@@ -258,20 +198,6 @@ body{background:#f5f0ea;min-height:100vh}
     <button class="btn2" onclick="closeM('task-modal')">Cancelar</button>
   </div>
 </div>
-<div class="moverlay" id="amelie-modal" style="display:none">
-  <div class="modal">
-    <h3>🐾 Passeio da Amelie <button class="mclose" onclick="closeM('amelie-modal')">×</button></h3>
-    <p style="font-size:11px;color:#888;margin-bottom:7px">Quem levou a Amelie?</p>
-    <div class="psel" id="amelie-players"></div>
-    <div class="photo" id="photo-amelie" onclick="simPhoto('photo-amelie')">
-      <div style="font-size:20px;margin-bottom:3px">📷</div>
-      <p style="font-size:12px;color:#888">Foto na rua com a Amelie</p>
-      <p style="font-size:10px;color:#aaa;margin-top:1px">(obrigatório)</p>
-    </div>
-    <button class="btn1" onclick="submitAmelie()">Confirmar passeio</button>
-    <button class="btn2" onclick="closeM('amelie-modal')">Cancelar</button>
-  </div>
-</div>
 <div class="moverlay" id="contest-modal" style="display:none">
   <div class="modal">
     <h3>Nova contestação <button class="mclose" onclick="closeM('contest-modal')">×</button></h3>
@@ -292,11 +218,20 @@ body{background:#f5f0ea;min-height:100vh}
     <button class="btn1" style="margin-top:8px" onclick="submitContest()">Enviar contestação</button>
     <button class="btn2" onclick="closeM('contest-modal')">Cancelar</button>
   </div>
+</div>
 <script>
-const SB = supabase.createClient(
+const SB=supabase.createClient(
   'https://gockclaydeemomxqmzdx.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdvY2tjbGF5ZGVlbW9teHFtemR4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg3MDA4NzEsImV4cCI6MjA5NDI3Njg3MX0.cLyLvZcQsm3GVwP6T7OGl1WQgj6zOpEJqyu8nS9OJW0'
 );
+
+const PLAYERS_DEF=[
+  {id:'bel',  name:'Bel',  emoji:'🧁',color:'#E88080',bg:'#FFEBEB',wawa:false},
+  {id:'gabil',name:'Gabil',emoji:'⚽',color:'#6A9E6A',bg:'#F0F7F0',wawa:false},
+  {id:'nho',  name:'Nhó',  emoji:'🌸',color:'#E8956D',bg:'#FFF4EC',wawa:false},
+  {id:'wawa', name:'Wawa', emoji:'🌙',color:'#8A6AAE',bg:'#F5EEFF',wawa:true},
+  {id:'pepe', name:'Pepe', emoji:'🔥',color:'#C4613A',bg:'#FFF8F0',wawa:false},
+];
 
 const TASKS=[
   {id:'lixo1',name:'Tirar lixo da cozinha',cat:'lixo',pts:10,icon:'🗑️',type:'normal'},
@@ -364,11 +299,10 @@ const POS_SEALS=[
   {emoji:'🌟',name:'Novato dedicado',desc:'Primeiros selos conquistados'},
   {emoji:'⭐',name:'Doméstica Rainha',desc:'3 itens raros no mês (+150 pts)'},
   {emoji:'👑',name:'Lendária',desc:'Todos os itens raros (+300 pts)'},
-  {emoji:'🐾',name:'Guardiã da Amelie',desc:'7 passeios seguidos (+300 pts)'},
 ];
 
-let players=[], waterGuardian=null, waterInterval=null;
-let photoState={}, selPlayer=null, selTask=null, ameliePlayer=null;
+let players=[], waterGuardian=null, waterInterval=null, waterStartTime=null;
+let photoState={}, photoFiles={}, selPlayer=null, selTask=null;
 let contestReporter=null, contestAccused=null;
 let todayLogs=[], activeSeals=[], contests=[], pollData=[], pollVotes=[];
 
@@ -377,7 +311,6 @@ const now=()=>Date.now();
 const monthStr=()=>{const m=new Date();return m.toLocaleDateString('pt-BR',{month:'long',year:'numeric'});};
 
 async function init(){
-  buildPawRow();
   await loadAll();
   setInterval(loadAll,30000);
 }
@@ -389,7 +322,10 @@ async function loadAll(){
 
 async function loadPlayers(){
   const{data}=await SB.from('players').select('*').order('pts',{ascending:false});
-  if(data)players=data;
+  if(data)players=data.map(p=>{
+    const def=PLAYERS_DEF.find(d=>d.id===p.id);
+    return {...p, emoji:def?.emoji||p.emoji, color:def?.color||p.color, bg:def?.bg||p.bg, wawa:def?.wawa||p.wawa};
+  });
 }
 
 async function loadTodayLogs(){
@@ -399,7 +335,13 @@ async function loadTodayLogs(){
 
 async function loadWater(){
   const{data}=await SB.from('water_guardian').select('*').eq('id',1).single();
-  if(data){waterGuardian=data;if(data.water_empty&&data.water_empty_time)startWaterTimer();}
+  if(data){
+    waterGuardian=data;
+    if(data.water_empty&&data.water_empty_time&&!waterInterval){
+      waterStartTime=new Date(data.water_empty_time).getTime();
+      startWaterTimer();
+    }
+  }
 }
 
 async function loadSeals(){
@@ -423,7 +365,7 @@ async function loadPoll(){
       {option_text:'Jantar em restaurante especial',votes:0,month:mn},
       {option_text:'Cinema + pipoca para todos',votes:0,month:mn},
       {option_text:'Dia de spa/massagem',votes:0,month:mn},
-      {option_text:'Passeio surpresa com a Amelie',votes:0,month:mn},
+      {option_text:'Passeio surpresa em família',votes:0,month:mn},
     ]);
     loadPoll();
   }
@@ -433,20 +375,11 @@ function renderDashboard(){
   const mn=monthStr();
   document.getElementById('month-lbl').textContent='Jogo cooperativo · '+mn.charAt(0).toUpperCase()+mn.slice(1);
   document.getElementById('team-month').textContent=mn.charAt(0).toUpperCase()+mn.slice(1);
-  const totalAmeliePts=players.reduce((s,p)=>s+(p.amelie_pts||0),0);
-  const maxStreak=players.reduce((m,p)=>Math.max(m,p.amelie_streak||0),0);
-  const maxCount=players.reduce((m,p)=>Math.max(m,p.amelie_count||0),0);
-  document.getElementById('leg-pts').textContent=totalAmeliePts;
-  document.getElementById('leg-count').textContent=maxCount;
-  document.getElementById('leg-streak').textContent=maxStreak;
-  document.getElementById('leg-miss').textContent=Math.max(0,7-maxStreak);
-  const st=document.getElementById('stk-track');
-  st.innerHTML='';
-  for(let i=0;i<7;i++){const d=document.createElement('div');d.className='stk-day'+(i<maxStreak?' done':'');d.textContent=i<maxStreak?'🐾':'·';st.appendChild(d);}
-  renderWater();
-  const total=players.reduce((s,p)=>s+(p.pts||0),0)+totalAmeliePts;
+  // CORRIGIDO: soma apenas pts, sem duplicar
+  const total=players.reduce((s,p)=>s+(p.pts||0),0);
   document.getElementById('team-prog').style.width=Math.min(100,total/4000*100)+'%';
   document.getElementById('team-pts-lbl').textContent=total.toLocaleString()+' pts';
+  renderWater();
   if(players.length){
     document.getElementById('players-loading').style.display='none';
     document.getElementById('pgrid').style.display='grid';
@@ -467,36 +400,50 @@ function renderDashboard(){
 
 function renderWater(){
   if(!waterGuardian)return;
-  const g=players.find(p=>p.id===waterGuardian.guardian_id);
-  const card=document.getElementById('water-card');
+  const def=PLAYERS_DEF.find(d=>d.id===waterGuardian.guardian_id);
+  const g=players.find(p=>p.id===waterGuardian.guardian_id)||def;
   document.getElementById('water-name').textContent='Guardiã da semana: '+(g?.name||'—');
+  const card=document.getElementById('water-card');
   const timer=document.getElementById('water-timer');
-  if(waterGuardian.water_empty&&waterGuardian.water_empty_time){
-    const emptyTime=new Date(waterGuardian.water_empty_time).getTime();
-    const rem=Math.max(0,30*60*1000-(now()-emptyTime));
-    if(rem>0){const mins=Math.floor(rem/60000);const secs=Math.floor((rem%60000)/1000);timer.textContent=`⏱️ ${mins}:${secs.toString().padStart(2,'0')} restantes`;card.classList.add('alert');}
-    else{timer.textContent='⛔ Prazo esgotado!';card.classList.add('alert');}
-  } else {timer.textContent='';card.classList.remove('alert');}
+  if(!waterGuardian.water_empty){
+    timer.textContent='';card.classList.remove('alert');
+  }
 }
 
 function startWaterTimer(){
   if(waterInterval)clearInterval(waterInterval);
+  waterStartTime=waterStartTime||now();
   waterInterval=setInterval(async()=>{
-    if(!waterGuardian?.water_empty){clearInterval(waterInterval);waterInterval=null;renderWater();return;}
-    const emptyTime=new Date(waterGuardian.water_empty_time).getTime();
-    const rem=Math.max(0,30*60*1000-(now()-emptyTime));
-    if(rem<=0&&!waterGuardian.seal_applied){
-      const g=players.find(p=>p.id===waterGuardian.guardian_id);
-      if(g&&!g.wawa){
-        const expires=new Date(now()+7*24*60*60*1000).toISOString();
-        await SB.from('active_seals').insert({player_id:g.id,seal_id:'sedento',expires_at:expires});
-        await SB.from('water_guardian').update({seal_applied:true}).eq('id',1);
-        waterGuardian.seal_applied=true;
-        showToast('🏜️ '+g.name+' recebeu o selo Guardião Sedento!');
-        loadSeals();
+    if(!waterGuardian?.water_empty){
+      clearInterval(waterInterval);waterInterval=null;
+      document.getElementById('water-timer').textContent='';
+      document.getElementById('water-card').classList.remove('alert');
+      return;
+    }
+    const elapsed=now()-waterStartTime;
+    const rem=Math.max(0,30*60*1000-elapsed);
+    const card=document.getElementById('water-card');
+    const timer=document.getElementById('water-timer');
+    if(rem>0){
+      const mins=Math.floor(rem/60000);
+      const secs=Math.floor((rem%60000)/1000);
+      timer.textContent=`⏱️ ${mins}:${secs.toString().padStart(2,'0')} restantes`;
+      card.classList.add('alert');
+    } else {
+      timer.textContent='⛔ Prazo esgotado!';
+      card.classList.add('alert');
+      if(!waterGuardian.seal_applied){
+        const g=players.find(p=>p.id===waterGuardian.guardian_id);
+        if(g&&!g.wawa){
+          const expires=new Date(now()+7*24*60*60*1000).toISOString();
+          await SB.from('active_seals').insert({player_id:g.id,seal_id:'sedento',expires_at:expires});
+          await SB.from('water_guardian').update({seal_applied:true}).eq('id',1);
+          waterGuardian.seal_applied=true;
+          showToast('🏜️ '+g.name+' recebeu o selo Guardião Sedento!');
+          loadSeals();
+        }
       }
     }
-    renderWater();
   },1000);
 }
 
@@ -505,31 +452,37 @@ async function reportEmpty(){
   const t=new Date().toISOString();
   await SB.from('water_guardian').update({water_empty:true,water_empty_time:t,seal_applied:false}).eq('id',1);
   waterGuardian={...waterGuardian,water_empty:true,water_empty_time:t,seal_applied:false};
-  startWaterTimer();renderWater();
+  waterStartTime=now();
+  startWaterTimer();
   showToast('🚨 Garrafa reportada vazia! Guardião tem 30 min.');
 }
 
 async function reportRefill(){
   if(!waterGuardian?.water_empty){showToast('Garrafa não estava reportada como vazia.');return;}
   const g=players.find(p=>p.id===waterGuardian.guardian_id);
-  const emptyTime=new Date(waterGuardian.water_empty_time).getTime();
-  const withinTime=(now()-emptyTime)<30*60*1000;
+  const elapsed=now()-waterStartTime;
+  const withinTime=elapsed<30*60*1000;
   await SB.from('water_guardian').update({water_empty:false,water_empty_time:null,seal_applied:false}).eq('id',1);
   waterGuardian={...waterGuardian,water_empty:false,water_empty_time:null};
+  waterStartTime=null;
   if(waterInterval){clearInterval(waterInterval);waterInterval=null;}
+  document.getElementById('water-timer').textContent='';
+  document.getElementById('water-card').classList.remove('alert');
   if(withinTime&&g){
     await SB.from('players').update({pts:(g.pts||0)+10}).eq('id',g.id);
     showToast('✅ '+g.name+' reabasteceu a tempo! +10 pts bônus 💧');
   } else showToast('✅ Garrafa reabastecida.');
-  renderWater();loadPlayers().then(renderDashboard);
+  loadPlayers().then(renderDashboard);
 }
 
 async function nextGuardian(){
   const curr=GUARDIANS.indexOf(waterGuardian?.guardian_id||'bel');
   const next=GUARDIANS[(curr+1)%GUARDIANS.length];
+  if(waterInterval){clearInterval(waterInterval);waterInterval=null;}
+  waterStartTime=null;
   await SB.from('water_guardian').update({guardian_id:next,water_empty:false,water_empty_time:null,seal_applied:false,week_start:today()}).eq('id',1);
   await loadWater();renderDashboard();
-  const g=players.find(p=>p.id===next);
+  const g=PLAYERS_DEF.find(p=>p.id===next);
   showToast('Semana nova! Guardião: '+(g?.name||next)+' 💧');
 }
 
@@ -570,8 +523,7 @@ function renderCombos(){
   });
   html+=`
     <div class="ccard" style="border-color:var(--gold);background:#FFFBEC;margin-top:10px"><span class="cmult" style="color:#7A5500">+150 pts</span><div class="cname">⭐ Doméstica Rainha</div><div class="ctasks">3 itens raros no mês + selo</div></div>
-    <div class="ccard" style="border-color:var(--w4);background:var(--w1)"><span class="cmult" style="color:#7A5500">+300 pts</span><div class="cname">👑 Lendária</div><div class="ctasks">Todos os itens raros + selo</div></div>
-    <div class="ccard" style="border-color:var(--s3);background:#F0F7F0"><span class="cmult" style="color:var(--s4)">+300 pts</span><div class="cname">🐾 Guardiã da Amelie</div><div class="ctasks">7 passeios seguidos + selo</div></div>`;
+    <div class="ccard" style="border-color:var(--w4);background:var(--w1)"><span class="cmult" style="color:#7A5500">+300 pts</span><div class="cname">👑 Lendária</div><div class="ctasks">Todos os itens raros + selo</div></div>`;
   document.getElementById('clist').innerHTML=html;
 }
 
@@ -642,15 +594,29 @@ function showSec(id,btn){
   if(id==='poll'){loadPoll().then(renderPoll);}
 }
 
+// CORRIGIDO: foto obrigatória de verdade — abre câmera
 function simPhoto(id){
-  photoState[id]=true;
-  const a=document.getElementById(id);
-  a.className='photo ok';
-  a.innerHTML='<div style="font-size:20px;margin-bottom:3px">✅</div><p style="font-size:12px;color:#3D6B3D">Foto adicionada!</p>';
+  const input=document.createElement('input');
+  input.type='file';input.accept='image/*';input.capture='environment';
+  input.onchange=()=>{
+    if(input.files&&input.files[0]){
+      photoState[id]=true;
+      photoFiles[id]=input.files[0];
+      const a=document.getElementById(id);
+      a.className='photo ok';
+      const reader=new FileReader();
+      reader.onload=(e)=>{
+        a.innerHTML=`<img src="${e.target.result}" style="width:100%;max-height:120px;object-fit:cover;border-radius:8px;margin-bottom:4px"><p style="font-size:11px;color:#3D6B3D;font-weight:600">✅ Foto adicionada!</p>`;
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  };
+  input.click();
 }
 
 function resetPhoto(id){
   photoState[id]=false;
+  photoFiles[id]=null;
   const a=document.getElementById(id);
   a.className='photo';
   a.innerHTML='<div style="font-size:20px;margin-bottom:3px">📷</div><p style="font-size:12px;color:#888">Toque para adicionar foto</p><p style="font-size:10px;color:#aaa;margin-top:1px">(obrigatório)</p>';
@@ -668,7 +634,6 @@ function openTaskModal(){
 
 function selP(id,btn,group){
   if(group==='modal-players')selPlayer=id;
-  else if(group==='amelie-players')ameliePlayer=id;
   else if(group==='c-reporter')contestReporter=id;
   else if(group==='c-accused')contestAccused=id;
   document.querySelectorAll('#'+group+' .pbtn').forEach(b=>b.classList.remove('selected'));
@@ -686,7 +651,7 @@ function checkCprev(){
 async function submitTask(){
   if(!selPlayer){showToast('Selecione quem está registrando!');return;}
   if(!selTask){showToast('Selecione uma tarefa!');return;}
-  if(!photoState['photo-task']){showToast('Adicione uma foto!');return;}
+  if(!photoState['photo-task']){showToast('Foto obrigatória! Tire uma foto da tarefa.');return;}
   const already=todayLogs.find(l=>l.player_id===selPlayer&&l.task_id===selTask);
   if(already){showToast('Você já registrou essa tarefa hoje!');return;}
   const t=TASKS.find(x=>x.id===selTask);
@@ -709,7 +674,7 @@ async function submitTask(){
     if(combo){const s=combo.tasks.reduce((acc,tid)=>{const tk=TASKS.find(x=>x.id===tid);return acc+(tk?tk.pts:0);},0);bonus=Math.round(s*combo.mult);comboName=combo.name;}
   }
   const total=base+bonus;
-  await SB.from('task_logs').insert({player_id:selPlayer,task_id:selTask,task_name:t.name,pts:total,done_date:today(),combo_name:comboName,combo_bonus:bonus,photo_url:'demo'});
+  await SB.from('task_logs').insert({player_id:selPlayer,task_id:selTask,task_name:t.name,pts:total,done_date:today(),combo_name:comboName,combo_bonus:bonus,photo_url:'uploaded'});
   await SB.from('players').update({pts:(p.pts||0)+total}).eq('id',selPlayer);
   closeM('task-modal');
   await loadAll();
@@ -720,33 +685,6 @@ async function submitTask(){
 function quickReg(taskId){
   openTaskModal();
   setTimeout(()=>{const sel=document.getElementById('tsel');sel.value=taskId;selTask=taskId;checkCprev();},80);
-}
-
-function openAmelieModal(){
-  ameliePlayer=null;resetPhoto('photo-amelie');
-  document.getElementById('amelie-players').innerHTML=players.map(p=>`<button class="pbtn" onclick="selP('${p.id}',this,'amelie-players')">${p.emoji} ${p.name}</button>`).join('');
-  document.getElementById('amelie-modal').style.display='flex';
-}
-
-async function submitAmelie(){
-  if(!ameliePlayer){showToast('Selecione quem levou a Amelie!');return;}
-  if(!photoState['photo-amelie']){showToast('Adicione a foto na rua!');return;}
-  const p=players.find(x=>x.id===ameliePlayer);
-  if(p.amelie_last_date===today()){showToast('O passeio de hoje já foi registrado! 🐾');return;}
-  const pts=p.wawa?200:100;
-  const yesterday=new Date();yesterday.setDate(yesterday.getDate()-1);
-  const yStr=yesterday.toISOString().split('T')[0];
-  const newStreak=p.amelie_last_date===yStr?(p.amelie_streak||0)+1:1;
-  const newCount=(p.amelie_count||0)+1;
-  await SB.from('players').update({pts:(p.pts||0)+pts,amelie_pts:(p.amelie_pts||0)+pts,amelie_count:newCount,amelie_streak:newStreak,amelie_last_date:today()}).eq('id',ameliePlayer);
-  if(newStreak>=7){
-    const expires=new Date(now()+7*24*60*60*1000).toISOString();
-    await SB.from('active_seals').insert({player_id:ameliePlayer,seal_id:'amelie',expires_at:expires});
-    showToast('🐾👑 SELO: Guardiã da Amelie conquistado por '+p.name+'!');
-  }
-  closeM('amelie-modal');
-  await loadAll();
-  triggerLegendary(pts,p.name);
 }
 
 function openContestModal(){
@@ -760,8 +698,8 @@ async function submitContest(){
   if(!contestReporter){showToast('Selecione quem está contestando!');return;}
   if(!contestAccused){showToast('Selecione quem está sendo contestado!');return;}
   if(contestReporter===contestAccused){showToast('Você não pode se contestar!');return;}
-  if(!photoState['photo-contest']){showToast('Adicione uma foto como evidência!');return;}
-  await SB.from('contests').insert({reporter_id:contestReporter,accused_id:contestAccused,type:document.getElementById('ctype').value,status:'defense',votes_valid:0,votes_invalid:0,photo_url:'demo'});
+  if(!photoState['photo-contest']){showToast('Foto obrigatória como evidência!');return;}
+  await SB.from('contests').insert({reporter_id:contestReporter,accused_id:contestAccused,type:document.getElementById('ctype').value,status:'defense',votes_valid:0,votes_invalid:0,photo_url:'uploaded'});
   closeM('contest-modal');
   await loadContests();renderContests();
   showSec('contests',document.querySelectorAll('.nav button')[4]);
@@ -799,7 +737,7 @@ async function castContestVote(id,type){
 }
 
 async function castPoll(optId){
-  if(!selPlayer){showToast('Selecione seu personagem primeiro!');return;}
+  if(!selPlayer){showToast('Selecione seu personagem no início!');return;}
   const mn=today().slice(0,7);
   const myVote=pollVotes.find(v=>v.player_id===selPlayer&&v.month===mn);
   if(myVote){showToast('Você já votou este mês!');return;}
@@ -835,23 +773,6 @@ function floatPts(pts){
 }
 
 function triggerCombo(name,pts){showToast('⚡ COMBO: '+name+' — +'+pts+' pts!');floatPts(pts);}
-
-function triggerLegendary(pts,nome){
-  const fl=document.createElement('div');fl.className='lflash';document.body.appendChild(fl);
-  setTimeout(()=>fl.remove(),900);
-  setTimeout(()=>showToast('🌟 LENDÁRIO! '+nome+' passeou com a Amelie — +'+pts+' pts! 🐾'),250);
-  setTimeout(()=>floatPts(pts),450);
-}
-
-function buildPawRow(){
-  const pr=document.getElementById('pw-row');
-  for(let i=0;i<16;i++){
-    const p=document.createElement('div');
-    p.className='pw'+(i%2===0?'':' alt');
-    p.innerHTML='<div class="pw-toes"><div class="pw-toe"></div><div class="pw-toe"></div><div class="pw-toe"></div></div><div class="pw-pad"></div>';
-    pr.appendChild(p);
-  }
-}
 
 init();
 </script>
