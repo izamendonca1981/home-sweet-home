@@ -202,6 +202,21 @@ body{background:#f5f0ea;min-height:100vh}
 .feed-pts{font-size:13px;font-weight:700;color:var(--w5)}
 .feed-photo{width:100%;max-height:200px;object-fit:cover;display:block}
 .feed-time{font-size:10px;color:#888;padding:6px 12px}
+.polaroid-wrap{padding:4px 12px 8px;display:flex;justify-content:center}
+.polaroid{background:#fff;padding:7px 7px 20px;box-shadow:1px 2px 8px rgba(0,0,0,.15),0 0 0 .5px rgba(0,0,0,.06);display:inline-block;position:relative;cursor:pointer;transition:transform .2s;max-width:200px;width:100%}
+.polaroid:hover{transform:rotate(0deg) scale(1.04)}
+.polaroid img,.polaroid .pol-placeholder{width:100%;height:130px;object-fit:cover;display:block}
+.polaroid .pol-placeholder{background:linear-gradient(135deg,#f5f5f5,#e8e8e8);display:flex;align-items:center;justify-content:center;font-size:28px}
+.pol-caption{font-size:10px;color:#888;text-align:center;margin-top:5px;font-style:italic;line-height:1.3}
+.pol-pin{position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;z-index:3;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.pol-pin.red{background:radial-gradient(circle at 35% 35%,#ff6b6b,#c0392b)}
+.pol-pin.blue{background:radial-gradient(circle at 35% 35%,#74b9ff,#2980b9)}
+.pol-pin.yellow{background:radial-gradient(circle at 35% 35%,#ffeaa7,#f39c12)}
+.pol-pin.green{background:radial-gradient(circle at 35% 35%,#55efc4,#00b894)}
+.photo-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;z-index:500;padding:20px;cursor:pointer}
+.photo-overlay-inner{background:#fff;padding:10px 10px 26px;max-width:300px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.5)}
+.photo-overlay-inner img{width:100%;display:block}
+.photo-overlay-caption{font-size:12px;color:#888;text-align:center;margin-top:8px;font-style:italic}
 .feed-contest-btn{margin:0 12px 10px;width:calc(100% - 24px);padding:7px;background:#FFF0F0;color:#C44444;border:.5px solid var(--red);border-radius:8px;font-size:12px;cursor:pointer;font-weight:500}
 
 /* COMBOS */
@@ -263,6 +278,62 @@ body{background:#f5f0ea;min-height:100vh}
 .lbl{font-size:11px;color:#888;margin-bottom:5px;display:block}
 .section-title{font-size:13px;font-weight:600;color:#333;margin-bottom:10px}
 .empty{text-align:center;padding:2rem;color:#888;font-size:13px}
+
+/* MÃOS À OBRA */
+.maos-dash{border-radius:12px;padding:12px;margin-bottom:1rem;border:.5px solid var(--w3);background:var(--w1)}
+.maos-dash.has-open{background:#FFF8F0;border:1.5px solid #FF8C00}
+.maos-dash.multi{background:#FFF8F0;border:1.5px solid #FF8C00}
+.maos-dash-hdr{display:flex;align-items:center;gap:10px}
+.maos-dash-info{flex:1}
+.maos-dash-title{font-size:13px;font-weight:600;color:#7A3500}
+.maos-dash-sub{font-size:10px;color:#A05000;margin-top:2px;line-height:1.4}
+.maos-dash-diff{font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;display:inline-block;margin-top:3px}
+.maos-diff-facil{background:#D4E8D4;color:#2A5A2A}
+.maos-diff-medio{background:#FFF8E1;color:#7A5500;border:.5px solid #FFD54F}
+.maos-diff-dificil{background:#FFE8D0;color:#7A3500}
+.maos-diff-critico{background:#FFE0E0;color:#7A0000}
+.maos-dash-timer{font-size:12px;font-weight:700;color:#FF8C00;flex-shrink:0}
+.maos-dash-btns{display:flex;gap:6px;margin-top:8px}
+.maos-dash-btn{flex:1;padding:6px;border:none;border-radius:9px;font-size:11px;font-weight:700;cursor:pointer}
+.maos-dash-btn.resolve{background:var(--s4);color:#fff}
+.maos-dash-btn.add{background:#f0f0f0;border:.5px solid #ddd;color:#888}
+.maos-dash-badge{background:#FF8C00;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px;margin-left:4px}
+.maos-dash-list{display:flex;flex-direction:column;gap:4px;margin-top:8px}
+.maos-dash-item{background:#fff;border:.5px solid #FFD4A0;border-radius:8px;padding:6px 10px;display:flex;align-items:center;gap:7px}
+.maos-dash-item-diff{font-size:8px;font-weight:700;padding:2px 5px;border-radius:4px;flex-shrink:0}
+.maos-dash-item-desc{font-size:11px;color:#555;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.maos-dash-item-timer{font-size:10px;font-weight:600;color:#FF8C00;flex-shrink:0}
+.maos-card{background:#fff;border:.5px solid #eee;border-radius:14px;padding:12px;margin-bottom:8px}
+.maos-card.aberto{border-left:4px solid #FF8C00}
+.maos-card.resolvido{border-left:4px solid var(--s4);opacity:.7}
+.maos-card.expirado{border-left:4px solid var(--red);opacity:.6}
+.maos-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:4px}
+.maos-title{font-size:13px;font-weight:700;color:#333}
+.maos-diff{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700}
+.diff-facil{background:#D4E8D4;color:#3D6B3D}
+.diff-medio{background:#FFF8E1;color:#7A5500}
+.diff-dificil{background:#FFE8D0;color:#7A3500}
+.diff-critico{background:#FFE0E0;color:#7A0000}
+.maos-desc{font-size:12px;color:#555;margin-bottom:6px}
+.maos-meta{font-size:10px;color:#888;margin-bottom:8px}
+.maos-timer{font-size:11px;font-weight:700;color:#FF8C00;margin-bottom:6px}
+.maos-photos{display:flex;gap:6px;margin-bottom:8px}
+.maos-photo{width:60px;height:60px;border-radius:8px;object-fit:cover;cursor:pointer;border:.5px solid #eee}
+.maos-pts{font-size:18px;font-weight:900;color:#FF8C00}
+.maos-btn{padding:6px 14px;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;background:#FF8C00;color:#fff}
+.maos-resolver-btn{background:var(--s4);color:#fff}
+
+/* INSÍGNIAS */
+.insignia-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-bottom:1rem}
+.insignia-card{border-radius:16px;padding:12px;text-align:center;border:2px solid;position:relative}
+.insignia-icon{font-size:32px;margin-bottom:6px}
+.insignia-name{font-size:11px;font-weight:800;color:#333;line-height:1.3}
+.insignia-month{font-size:10px;color:#888;margin-top:3px}
+.insignia-player{font-size:10px;font-weight:700;margin-top:4px}
+.ilustre-card{background:linear-gradient(135deg,#FFF8E1,#FFE082);border:2px solid #F5C842;border-radius:16px;padding:16px;text-align:center;margin-bottom:1rem}
+.ilustre-crown{font-size:40px;margin-bottom:6px}
+.ilustre-title{font-size:16px;font-weight:900;color:#7A5500}
+.ilustre-sub{font-size:12px;color:#A07000;margin-top:4px}
 </style>
 </head>
 <body>
@@ -308,97 +379,41 @@ body{background:#f5f0ea;min-height:100vh}
     <button onclick="showSec('seals',this)">Selos</button>
     <button onclick="showSec('contests',this)">Contestações</button>
     <button onclick="showSec('poll',this)">Premiação</button>
+    <button onclick="showSec('maos',this)">🔧 Reparos</button>
+    <button onclick="showSec('insignias',this)">🏅 Insígnias</button>
   </div>
 
   <!-- DASHBOARD -->
   <div id="dashboard" class="sec active">
 
-    <!-- BUFF AMÉLIE -->
-    <div class="amelie-card" id="amelie-card">
-      <div class="amelie-inner">
-        <div class="amelie-img-wrap">
-          <img class="amelie-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAq5klEQVR42tV9d3iUVfb/fev0kjqTMplMGiEhhBCCyFIeii5IE2Fd3bhWZFFRdl0UNQuW39p1v1hwRRd9RFl1LYgCSlhsqJGYhJLee5tkSibTZ973/f1x8O7LTMpE2X123z98kjBz33vPPfecz/mcc66EIAgosgc+SRAE+vc/giDwPE8QhCAIgiCQJEkQxH/m1RM89JSmDr/+ByYNohEEAX4gSRL9FzzEpJoFe4sQwltNUdR/TL/+HXsDe/BvERbP8xzHURQVvvPof+oRfnyIH5+pjkBG8gKKooLBINYs9D/4YDHxPC8IAsdxPM9fTGGBqRIbWnjT/6hawVpomsZGcKobP7amwB85jsODgnR4nidJ8r/E3E7p4TiOIAiO4xBCNE2DWoGT/VmaBTsA4wqCEAgE4DXgwv/nJIV1Ctusn3w+QjULBkIIURQFYsJefKr78F9ip7AlwaoEegAbP6UVXSAsjKeCwSCMhQ3WxdIpDERglv8+6fM8HwwGEUIMw4jfEoIbwLD8FGFhByGWEc/zFxFYwStgiv8+bQ0Gg4IgMAyDELJaradOnaqoqKipqens7PR6vWq1OjMz87LLLlu3bp1MJgsHRpOjD7BTgUAgGAwGAgGO4+AH8Wn/mQ/P83hkeBe4cOHiPfAK+PnkyZO33npramrqeGvPzc394osvBEEA4U76nNcseI1YMwGSXFywDgAHTh9o1nkvc5GcBtaRH3744amnnjp06FAgEGBZVqfTqVQqhUIhkUgoiuI4zuPx9Pb2DgwMSKXS0tLShQsXRnIeCZAReFaMD7BBuVjLEGMRjuM4jmNZFl50sU5iMBikadrhcDz44IPPP/88z/MajSY1NTU2NhY+4PF43G631+vleZ5hGI1GY7VaGxoapk+fXlVVJZFIJp0GARqIdxjsH6D2ix5niKMl+PWiSAqOBUVR33zzzZYtW2pra+VyeWJigsFgUCqV/f39ZrN5eHjY7XZfAJpIMi8vb2BgYHBw8OjRoytXrpzUeNHi+F5sdy+umLCvgP/i6f58ScFoFEXt2bPn97///eDgYFpaWmpqKsMwZrP57NmzVqsVPqnT6RISEmJiYpRK5dDQ0Pfff9/e3p6YmGg2m8+cObNy5cpJAT0N4sRCvYh2CsM/GD+E57mIkiIIYtu2bc8//zzDMDk5Oenpaa2tra2trSMjI2NjY/39/U6ns6OjQ61WZ2ZmXnbZZes2bJDJZOGuoNFgFqRJgFqhXgxBYIkBNs6wgvAcb1ACW2hwm0GeSu+WPvggNy9PPCl9H3vvvYTEREwkEuBnc3NyEiMjMSEiAhMTEhImJSaeiSB9B2uyElsgJVUqkikBkEpJgAAAAElFTkSuQmCC" alt="Amélie" onerror="this.style.display='none';this.nextSibling.style.display='flex'"/>
-          <div style="display:none;width:72px;height:72px;border-radius:50%;border:3px solid #F4A0C8;background:#FFD0EB;align-items:center;justify-content:center;font-size:28px">🐾</div>
-          <div class="amelie-paws">
-            <span class="amelie-paw">🐾</span>
-            <span class="amelie-paw">🐾</span>
-            <span class="amelie-paw">🐾</span>
-          </div>
-        </div>
-        <div class="amelie-info">
-          <div class="amelie-title">🐾 Buff da Amélie <span id="amelie-active-badge" class="amelie-active-badge" style="display:none"></span></div>
-          <div class="amelie-sub">Interaja com a Amélie e ganhe +10% em todas as ações por 3h.</div>
-          <div class="amelie-badge">+10% por 3h</div>
-          <div class="amelie-note">📷 Foto obrigatória</div>
-        </div>
-      </div>
-      <div class="amelie-actions">
-        <button class="amelie-btn" onclick="openAmelieModal('brincar')">🎾 Brincar</button>
-        <button class="amelie-btn" onclick="openAmelieModal('racao')">🍽️ Repor ração</button>
-        <button class="amelie-btn" onclick="openAmelieModal('agua')">💧 Repor água</button>
-        <button class="amelie-btn" onclick="openAmelieModal('petisco')">🦴 Petisco</button>
-        <button class="amelie-btn" onclick="openAmelieModal('tapetinho')">🧹 Tapetinho</button>
-        <button class="amelie-btn" onclick="openAmelieModal('sujeira')">🫧 Limpar sujeira</button>
-      </div>
-    </div>
+    <!-- MINI CARDS: AMÉLIE · MOTORISTA · CUCA -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem">
 
-    <!-- MOTORISTA FELIZ -->
-    <div class="motor-card" id="motor-card">
-      <div class="motor-inner">
-        <div style="flex-shrink:0;text-align:center">
-          <div class="motor-circle">
-            <div class="motor-smoke">
-              <span class="motor-s">💨</span>
-              <span class="motor-s">💨</span>
-              <span class="motor-s">💨</span>
-            </div>
-            <span class="motor-car">🚗</span>
-          </div>
-          <div class="motor-day-lbl" id="motor-day-lbl">1x/dia</div>
-        </div>
-        <div class="motor-info">
-          <div class="motor-title">🚗 Motorista Feliz</div>
-          <div class="motor-sub">Acione para o Pepe e ele ganha +5% diário. Com foto sorrindo: +5% extra por 3h para ambos!</div>
-          <div class="motor-badge">+5% diário ao Pepe</div>
-          <div class="motor-note">📷 Foto opcional (+bônus)</div>
-        </div>
+      <!-- AMÉLIE -->
+      <div id="amelie-card" onclick="showDetailPage('amelie')" style="background:linear-gradient(160deg,#fff,#FFF0F8);border:0.5px solid #F4A0C8;border-radius:14px;padding:10px 8px;text-align:center;cursor:pointer">
+        <div style="width:44px;height:44px;border-radius:50%;margin:0 auto 6px;border:2px solid #F4A0C8;background:#FFD0EB url('data:image/jpeg;base64,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') center/cover no-repeat"></div>
+        <div style="font-size:11px;font-weight:700;color:#7A3560;line-height:1.3;margin-bottom:3px">Buff da Amélie</div>
+        <div style="font-size:9px;color:#A05080">+10% por 3h</div>
+        <div id="amelie-mini-badge" style="display:none;font-size:8px;font-weight:700;background:#D4E8D4;color:#2A5A2A;padding:2px 6px;border-radius:6px;margin-top:3px">ATIVO</div>
+        <div id="amelie-mini-badge-off" style="font-size:8px;background:#F4A0C8;color:#7A1545;padding:2px 6px;border-radius:6px;margin-top:3px">Foto obrig.</div>
       </div>
-      <div class="motor-actions">
-        <button class="motor-btn" onclick="openMotorModal(false)">🚗 Pepe foi de bom humor!</button>
-        <button class="motor-btn" onclick="openMotorModal(true)">📷 + Foto sorrindo (+5%)</button>
-      </div>
-      <div class="motor-warning">⚠️ Apenas outros jogadores podem acionar · Limite: 1x por dia</div>
-    </div>
 
-    <!-- MESTRE CUCA -->
-    <div class="cuca-card">
-      <div class="cuca-hdr">
-        <div style="font-size:24px">👨‍🍳</div>
-        <div>
-          <div class="cuca-title">Mestre Cuca Lendário</div>
-          <div class="cuca-sub">Cozinhe e ganhe pontos lendários!</div>
+      <!-- MOTORISTA -->
+      <div id="motor-card" onclick="showDetailPage('motor')" style="background:linear-gradient(160deg,#fff,#FFF0F0);border:0.5px solid #F09090;border-radius:14px;padding:10px 8px;text-align:center;cursor:pointer">
+        <div style="width:44px;height:44px;border-radius:50%;margin:0 auto 6px;background:#FFDAD0;border:2px solid #F09090;display:flex;align-items:center;justify-content:center;font-size:22px;position:relative;overflow:visible">
+          <span style="display:block;animation:carRock .5s ease-in-out infinite alternate">🚗</span>
         </div>
-        <div style="margin-left:auto;text-align:right">
-          <div style="font-size:20px;font-weight:700;color:#E65100" id="cuca-pts">0</div>
-          <div style="font-size:10px;color:#A05000">pts este mês</div>
-        </div>
+        <div style="font-size:11px;font-weight:700;color:#7A2020;line-height:1.3;margin-bottom:3px">Motorista Feliz</div>
+        <div style="font-size:9px;color:#A03030">+5% ao Pepe</div>
+        <div id="motor-day-lbl" style="font-size:8px;background:#E88080;color:#5A0000;padding:2px 6px;border-radius:6px;margin-top:3px">1x/dia</div>
       </div>
-      <div class="cuca-scene">
-        <div class="steam steam1">💨</div>
-        <div class="steam steam2">💨</div>
-        <div class="steam steam3">💨</div>
-        <div class="pan-wrap">🍳</div>
-      </div>
-      <div class="cuca-stats">
-        <div class="cuca-stat"><div class="cuca-stat-val" id="cuca-count">0</div><div class="cuca-stat-lbl">refeições</div></div>
-        <div class="cuca-stat"><div class="cuca-stat-val" id="cuca-duos">0</div><div class="cuca-stat-lbl">duplas</div></div>
-        <div class="cuca-stat"><div class="cuca-stat-val" id="cuca-chef-seals">0</div><div class="cuca-stat-lbl">selos chef</div></div>
-      </div>
-      <div class="cuca-btns">
-        <button class="cuca-btn solo" onclick="openCucaModal('solo-prato')">🍽️ 1 Prato (60pts)</button>
-        <button class="cuca-btn full" onclick="openCucaModal('solo-completo')">🍱 Completa (120pts)</button>
-        <button class="cuca-btn duo-s" onclick="openCucaModal('dupla-prato')">👫 Dupla 1 Prato (80pts)</button>
-        <button class="cuca-btn duo-f" onclick="openCucaModal('dupla-completo')">👫 Dupla Completa (150pts)</button>
+
+      <!-- CUCA -->
+      <div onclick="showDetailPage('cuca')" style="background:linear-gradient(160deg,#fff,#FFF3E0);border:0.5px solid #FFB347;border-radius:14px;padding:10px 8px;text-align:center;cursor:pointer">
+        <div style="width:44px;height:44px;border-radius:50%;margin:0 auto 6px;background:#FFE0B2;border:2px solid #FFB347;display:flex;align-items:center;justify-content:center;font-size:22px">👨‍🍳</div>
+        <div style="font-size:11px;font-weight:700;color:#7A3500;line-height:1.3;margin-bottom:3px">Mestre Cuca</div>
+        <div style="font-size:9px;color:#A05000">60–150 pts</div>
+        <div id="cuca-mini-pts" style="font-size:8px;background:#FFB347;color:#5A2000;padding:2px 6px;border-radius:6px;margin-top:3px">0 pts/mês</div>
       </div>
     </div>
 
@@ -417,6 +432,9 @@ body{background:#f5f0ea;min-height:100vh}
       <div class="troca-list" id="troca-list"></div>
     </div>
 
+    <!-- MÃOS À OBRA DASHBOARD -->
+    <div id="maos-dash-card"></div>
+
     <!-- WATER -->
     <div class="water-card" id="water-card">
       <div style="font-size:24px">💧</div>
@@ -428,7 +446,7 @@ body{background:#f5f0ea;min-height:100vh}
       <div class="wbtns">
         <button class="wbtn rep" onclick="reportEmpty()">🚨 Vazia!</button>
         <button class="wbtn ref" id="btn-enchi" onclick="reportRefill()">✅ Enchi</button>
-        <button class="wbtn-next" onclick="nextGuardian()">↻ Próx. semana</button>
+        <button class="wbtn-next" style="display:none"></button>
       </div>
     </div>
 
@@ -497,7 +515,60 @@ body{background:#f5f0ea;min-height:100vh}
       <button class="btn2" style="margin-top:8px" onclick="suggestPoll()">+ Sugerir premiação (próximo mês)</button>
     </div>
   </div>
+
+  <!-- MÃOS À OBRA -->
+  <div id="maos" class="sec">
+    <div style="background:var(--w1);border:.5px solid var(--w3);border-radius:8px;padding:8px 12px;font-size:11px;color:var(--w5);margin-bottom:1rem">
+      Reporte um problema na casa. Quem resolver em 30 dias ganha os pontos. Se ninguém resolver, todos perdem 50 pts!
+    </div>
+    <div id="maos-list"></div>
+    <button class="btn2" onclick="openMaosModal()" style="margin-top:8px">🔧 Reportar problema</button>
+  </div>
+
+  <!-- INSÍGNIAS -->
+  <div id="insignias" class="sec">
+    <div id="ilustre-section"></div>
+    <p class="section-title">🏅 Insígnias conquistadas</p>
+    <div class="insignia-grid" id="insignia-grid"></div>
+    <div id="insignia-ranking"></div>
+  </div>
 </div>
+</div>
+
+<!-- MÃOS À OBRA MODAL -->
+<div class="moverlay" id="maos-modal" style="display:none">
+  <div class="modal">
+    <h3>🔧 Reportar problema <button class="mclose" onclick="closeM('maos-modal')">×</button></h3>
+    <label class="lbl">Descrição do problema</label>
+    <textarea id="maos-desc" class="txt-input" placeholder="Ex: Chuveiro do banheiro social pingando..."></textarea>
+    <label class="lbl">Nível de dificuldade</label>
+    <div class="psel" id="maos-diff-sel">
+      <button class="pbtn" onclick="selectMaosDiff('facil',this)">🟢 Fácil<br><span style="font-size:10px;opacity:.7">100 pts</span></button>
+      <button class="pbtn" onclick="selectMaosDiff('medio',this)">🟡 Médio<br><span style="font-size:10px;opacity:.7">200 pts</span></button>
+      <button class="pbtn" onclick="selectMaosDiff('dificil',this)">🟠 Difícil<br><span style="font-size:10px;opacity:.7">300 pts</span></button>
+      <button class="pbtn" onclick="selectMaosDiff('critico',this)">🔴 Crítico<br><span style="font-size:10px;opacity:.7">400 pts</span></button>
+    </div>
+    <div class="photo" id="photo-maos-before" onclick="simPhoto('photo-maos-before')">
+      <div style="font-size:20px;margin-bottom:3px">📷</div>
+      <p style="font-size:12px;color:#888">Foto do problema (obrigatório)</p>
+    </div>
+    <button class="btn1" id="btn-submit-maos" onclick="submitMaos()">Reportar problema</button>
+    <button class="btn2" onclick="closeM('maos-modal')">Cancelar</button>
+  </div>
+</div>
+
+<!-- RESOLVER MÃOS À OBRA MODAL -->
+<div class="moverlay" id="resolver-modal" style="display:none">
+  <div class="modal">
+    <h3>✅ Resolver problema <button class="mclose" onclick="closeM('resolver-modal')">×</button></h3>
+    <p style="font-size:12px;color:#888;margin-bottom:1rem" id="resolver-desc"></p>
+    <div class="photo" id="photo-maos-after" onclick="simPhoto('photo-maos-after')">
+      <div style="font-size:20px;margin-bottom:3px">📷</div>
+      <p style="font-size:12px;color:#888">Foto do problema resolvido (obrigatório)</p>
+    </div>
+    <button class="btn1" id="btn-submit-resolver" onclick="submitResolver()">Confirmar resolução</button>
+    <button class="btn2" onclick="closeM('resolver-modal')">Cancelar</button>
+  </div>
 </div>
 
 <!-- TASK MODAL -->
@@ -724,7 +795,7 @@ const AMELIE_ACTIONS={
 };
 
 // STATE
-let currentPlayer=null,players=[],waterGuardian=null,waterInterval=null,waterStartTime=null;
+let currentPlayer=null,players=[],waterGuardian=null,waterInterval=null;
 let photoState={},photoFiles={},selTask=null,cucaType=null,cucaPartner=null;
 let contestAccused=null,todayLogs=[],allLogs=[],activeSeals=[],contests=[],pollData=[],pollVotes=[];
 let profilePlayer=null,profileTab='day',cucaLogs=[];
@@ -813,7 +884,7 @@ function enterApp(playerId){
   av.textContent=def?.emoji||'👤';
   av.style.cssText=`background:${def?.bg||'#eee'};border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;`;
   // Ocultar motorista do Pepe (só outros podem acionar)
-  if(currentPlayer==='pepe'){document.getElementById('motor-card').style.display='none';}
+  if(currentPlayer==='pepe'){const mc=document.getElementById('motor-card');if(mc)mc.style.display='none';}
   init();
 }
 
@@ -833,11 +904,12 @@ function doLogout(e){
 // ─── INIT ────────────────────────────────────────────────
 async function init(){
   await loadAll();
+  await checkAndAwardInsignia();
   setInterval(loadAll,30000);
 }
 
 async function loadAll(){
-  await Promise.all([loadPlayers(),loadTodayLogs(),loadAllLogs(),loadWater(),loadSeals(),loadContests(),loadPoll(),loadCucaLogs()]);
+  await Promise.all([loadPlayers(),loadTodayLogs(),loadAllLogs(),loadWater(),loadSeals(),loadContests(),loadPoll(),loadCucaLogs(),loadMaos(),loadInsignias()]);
   renderDashboard();
 }
 
@@ -869,9 +941,18 @@ async function loadWater(){
   const{data}=await SB.from('water_guardian').select('*').eq('id',1).single();
   if(data){
     waterGuardian=data;
-    if(data.water_empty&&data.water_empty_time&&!waterInterval){
-      waterStartTime=new Date(data.water_empty_time).getTime();
-      startWaterTimer();
+    await checkAutoRotateGuardian();
+    // Timer: se garrafa está vazia, garantir que o timer está rodando
+    // Se já há um intervalo, ele usa a refTime correta — não recriar
+    if(waterGuardian.water_empty&&waterGuardian.water_empty_time){
+      if(!waterInterval)startWaterTimer();
+    } else {
+      // Garrafa não está vazia — parar timer se estiver rodando
+      if(waterInterval){clearInterval(waterInterval);waterInterval=null;}
+      const timer=document.getElementById('water-timer');
+      const card=document.getElementById('water-card');
+      if(timer)timer.textContent='';
+      if(card)card.classList.remove('alert');
     }
   }
 }
@@ -892,7 +973,8 @@ async function loadPoll(){
   const{data:votes}=await SB.from('poll_votes').select('*').eq('month',mn);
   if(opts)pollData=opts;
   if(votes)pollVotes=votes;
-  if(opts&&opts.length===0){
+  if(opts&&opts.length===0&&currentPlayer==='bel'){
+    // Só o primeiro jogador da lista insere as opções padrão para evitar duplicação
     await SB.from('poll').insert([
       {option_text:'Jantar em restaurante especial',votes:0,month:mn},
       {option_text:'Cinema + pipoca para todos',votes:0,month:mn},
@@ -915,10 +997,8 @@ function renderDashboard(){
   const myTotalCucaPts=myMonthCuca.reduce((s,l)=>s+(l.pts||0),0);
   const duos=cucaLogs.filter(l=>l.is_duo).length;
   const myChefSeals=players.find(p=>p.id===currentPlayer)?.chef_seals||0;
-  document.getElementById('cuca-pts').textContent=myTotalCucaPts;
-  document.getElementById('cuca-count').textContent=myMonthCuca.length;
-  document.getElementById('cuca-duos').textContent=Math.floor(duos/2);
-  document.getElementById('cuca-chef-seals').textContent=myChefSeals;
+  const miniPts=document.getElementById('cuca-mini-pts');
+  if(miniPts)miniPts.textContent=myTotalCucaPts+' pts/mês';
 
   if(myChefSeals>0){
     document.getElementById('chef-seals-section').style.display='block';
@@ -930,13 +1010,16 @@ function renderDashboard(){
 
   // Amélie buff ativo?
   const amelieSeal=activeSeals.find(s=>s.player_id===currentPlayer&&s.seal_id==='amelie_buff');
-  const badge=document.getElementById('amelie-active-badge');
-  if(amelieSeal){
+  const miniBadge=document.getElementById('amelie-mini-badge');
+  const miniBadgeOff=document.getElementById('amelie-mini-badge-off');
+  if(amelieSeal&&miniBadge){
     const rem=Math.ceil((new Date(amelieSeal.expires_at)-new Date())/60000);
-    badge.textContent=`+10% ativo · ${rem}min`;
-    badge.style.display='inline';
-  } else {
-    badge.style.display='none';
+    miniBadge.textContent='ATIVO · '+rem+'min';
+    miniBadge.style.display='inline-block';
+    if(miniBadgeOff)miniBadgeOff.style.display='none';
+  } else if(miniBadge){
+    miniBadge.style.display='none';
+    if(miniBadgeOff)miniBadgeOff.style.display='inline-block';
   }
 
   // Motorista — verificar se já foi acionado hoje
@@ -950,6 +1033,7 @@ function renderDashboard(){
     btnEnchi.style.display='none';
   }
 
+  renderMaosDash();
   renderWater();
 
   const total=players.reduce((s,p)=>s+(p.pts||0),0);
@@ -979,7 +1063,7 @@ function renderDashboard(){
 async function checkMotorToday(){
   const lbl=document.getElementById('motor-day-lbl');
   if(!lbl)return;
-  const{data}=await SB.from('task_logs').select('id').eq('task_id','motorista_feliz').eq('done_date',today());
+  const{data}=await SB.from('task_logs').select('id').eq('task_id','motorista_feliz').eq('done_date',today()).eq('player_id',currentPlayer);
   if(data&&data.length>0){
     lbl.textContent='✓ Acionado hoje';
     document.querySelectorAll('.motor-btn').forEach(b=>{b.disabled=true;b.style.opacity='.5';});
@@ -1039,6 +1123,71 @@ async function usarBonus(bonusId){
 }
 
 // ─── WATER ───────────────────────────────────────────────
+const OBRA_SVG=`<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(4,4) rotate(-35,14,14)"><rect x="2" y="12.5" width="24" height="4" rx="2" fill="#FF8C00"/><circle cx="26" cy="14.5" r="5.5" stroke="#FF8C00" stroke-width="3" fill="none"/><rect x="23" y="11.5" width="6" height="6" fill="#FFF8F0"/><rect x="24.5" y="12.5" width="3" height="4" fill="#FF8C00"/><circle cx="2" cy="14.5" r="4" stroke="#FF8C00" stroke-width="2.5" fill="none"/><rect x="-1" y="12.5" width="4" height="4" fill="#FFF8F0"/><rect x="0" y="13" width="2" height="3" fill="#FF8C00"/></g></svg>`;
+
+function renderMaosDash(){
+  const el=document.getElementById('maos-dash-card');
+  if(!el)return;
+  const abertos=maosData.filter(m=>m.status==='aberto');
+  if(!abertos.length){
+    el.innerHTML=`<div class="maos-dash" style="display:flex;align-items:center;gap:10px;margin-bottom:1rem">
+      ${OBRA_SVG}
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:600;color:#888">Mãos à Obra</div>
+        <div style="font-size:10px;color:#aaa;margin-top:2px">Nenhum reparo pendente 🎉</div>
+      </div>
+      <button onclick="showSec('maos',document.querySelector('.nav button[onclick*=maos]'))" style="padding:5px 10px;background:#f0f0f0;border:.5px solid #ddd;border-radius:8px;font-size:11px;color:#888;cursor:pointer">+ Reportar</button>
+    </div>`;
+    return;
+  }
+  if(abertos.length===1){
+    const m=abertos[0];
+    const diff=MAOS_DIFFS[m.difficulty]||MAOS_DIFFS.medio;
+    const days=Math.max(0,Math.ceil((new Date(m.expires_at)-new Date())/86400000));
+    el.innerHTML=`<div class="maos-dash has-open" style="margin-bottom:1rem">
+      <div class="maos-dash-hdr">
+        ${OBRA_SVG}
+        <div class="maos-dash-info">
+          <div class="maos-dash-title">Mãos à Obra</div>
+          <div class="maos-dash-sub">${m.description}</div>
+          <span class="maos-dash-diff maos-diff-${m.difficulty}">${diff.label} · ${diff.pts} pts</span>
+        </div>
+        <div class="maos-dash-timer">⏳ ${days}d</div>
+      </div>
+      <div class="maos-dash-btns">
+        <button class="maos-dash-btn resolve" onclick="openResolverModal(${m.id},'${m.description.replace(/'/g,"\'")}')">✅ Eu resolvi!</button>
+        <button class="maos-dash-btn add" onclick="showSec('maos',document.querySelector('.nav button[onclick*=maos]'))">+ Reportar outro</button>
+      </div>
+    </div>`;
+    return;
+  }
+  // Múltiplos — ordenar por urgência (menos dias primeiro)
+  const sorted=[...abertos].sort((a,b)=>new Date(a.expires_at)-new Date(b.expires_at));
+  el.innerHTML=`<div class="maos-dash multi" style="margin-bottom:1rem">
+    <div class="maos-dash-hdr" style="margin-bottom:0">
+      ${OBRA_SVG}
+      <div style="flex:1">
+        <div class="maos-dash-title" style="display:flex;align-items:center;gap:6px">
+          Mãos à Obra <span class="maos-dash-badge">${abertos.length} abertos</span>
+        </div>
+      </div>
+      <button onclick="showSec('maos',document.querySelector('.nav button[onclick*=maos]'))" style="font-size:11px;color:#FF8C00;font-weight:600;cursor:pointer;background:none;border:none">Ver todos →</button>
+    </div>
+    <div class="maos-dash-list">
+      ${sorted.slice(0,3).map(m=>{
+        const diff=MAOS_DIFFS[m.difficulty]||MAOS_DIFFS.medio;
+        const days=Math.max(0,Math.ceil((new Date(m.expires_at)-new Date())/86400000));
+        return `<div class="maos-dash-item">
+          <span class="maos-dash-item-diff maos-diff-${m.difficulty}">${diff.label.split(' ')[0]}</span>
+          <span class="maos-dash-item-desc">${m.description}</span>
+          <span class="maos-dash-item-timer">⏳ ${days}d</span>
+        </div>`;
+      }).join('')}
+    </div>
+    <button onclick="openMaosModal()" style="width:100%;padding:6px;background:#f0f0f0;border:.5px solid #ddd;border-radius:9px;font-size:11px;color:#888;cursor:pointer;margin-top:6px">+ Reportar novo problema</button>
+  </div>`;
+}
+
 function renderWater(){
   if(!waterGuardian)return;
   const def=PLAYERS_DEF.find(d=>d.id===waterGuardian.guardian_id);
@@ -1048,16 +1197,52 @@ function renderWater(){
   if(!waterGuardian.water_empty){timer.textContent='';card.classList.remove('alert');}
 }
 
+// ─── GUARDIÃO AUTO-ROTAÇÃO ────────────────────────────────
+// Retorna a segunda-feira da semana atual em formato YYYY-MM-DD
+function getMondayOfWeek(){
+  const d=new Date();
+  const day=d.getDay(); // 0=dom,1=seg,...
+  const diff=day===0?-6:1-day; // ajusta para segunda
+  d.setDate(d.getDate()+diff);
+  return d.toISOString().split('T')[0];
+}
+
+async function checkAutoRotateGuardian(){
+  if(!waterGuardian||guardianRotating)return;
+  const currentMonday=getMondayOfWeek();
+  const savedWeekStart=waterGuardian.week_start||'';
+  if(savedWeekStart<currentMonday){
+    guardianRotating=true;
+    const curr=GUARDIANS.indexOf(waterGuardian.guardian_id||'bel');
+    const next=GUARDIANS[(curr+1)%GUARDIANS.length];
+    if(waterInterval){clearInterval(waterInterval);waterInterval=null;}
+    await SB.from('water_guardian').update({
+      guardian_id:next,
+      water_empty:false,
+      water_empty_time:null,
+      seal_applied:false,
+      week_start:currentMonday
+    }).eq('id',1);
+    waterGuardian={...waterGuardian,guardian_id:next,water_empty:false,water_empty_time:null,week_start:currentMonday};
+    const g=PLAYERS_DEF.find(p=>p.id===next);
+    showToast('💧 Semana nova! Guardião: '+(g?.name||next));
+    checkChefDaSemana();
+    guardianRotating=false;
+  }
+}
+
 function startWaterTimer(){
   if(waterInterval)clearInterval(waterInterval);
-  waterStartTime=waterStartTime||now();
   waterInterval=setInterval(async()=>{
-    if(!waterGuardian?.water_empty){
+    if(!waterGuardian?.water_empty||!waterGuardian?.water_empty_time){
       clearInterval(waterInterval);waterInterval=null;
-      document.getElementById('water-timer').textContent='';
-      document.getElementById('water-card').classList.remove('alert');return;
+      const t=document.getElementById('water-timer');
+      const c=document.getElementById('water-card');
+      if(t)t.textContent='';if(c)c.classList.remove('alert');return;
     }
-    const elapsed=now()-waterStartTime;
+    // Sempre lê water_empty_time do objeto atual — nunca usa closure
+    const refTime=new Date(waterGuardian.water_empty_time).getTime();
+    const elapsed=now()-refTime;
     const rem=Math.max(0,30*60*1000-elapsed);
     const card=document.getElementById('water-card');
     const timer=document.getElementById('water-timer');
@@ -1072,7 +1257,7 @@ function startWaterTimer(){
       if(!waterGuardian.seal_applied){
         const g=players.find(p=>p.id===waterGuardian.guardian_id);
         if(g&&!g.wawa){
-          const expires=new Date(now()+7*24*60*60*1000).toISOString();
+          const expires=new Date(now()+24*60*60*1000).toISOString();
           await SB.from('active_seals').insert({player_id:g.id,seal_id:'sedento',expires_at:expires});
           await SB.from('water_guardian').update({seal_applied:true}).eq('id',1);
           waterGuardian.seal_applied=true;
@@ -1089,21 +1274,21 @@ async function reportEmpty(){
   const t=new Date().toISOString();
   await SB.from('water_guardian').update({water_empty:true,water_empty_time:t,seal_applied:false}).eq('id',1);
   waterGuardian={...waterGuardian,water_empty:true,water_empty_time:t,seal_applied:false};
-  waterStartTime=now();
+  if(waterInterval){clearInterval(waterInterval);waterInterval=null;}
   startWaterTimer();
   showToast('🚨 Garrafa reportada vazia! Guardião tem 30 min.');
 }
 
 async function reportRefill(){
   if(!waterGuardian?.water_empty){showToast('Garrafa não estava reportada como vazia.');return;}
-  // Apenas o guardião pode encher
   if(waterGuardian.guardian_id!==currentPlayer){showToast('Apenas o guardião da semana pode registrar o abastecimento aqui. Use "Registrar tarefa".');return;}
   const g=players.find(p=>p.id===waterGuardian.guardian_id);
-  const elapsed=now()-waterStartTime;
+  // Usa water_empty_time do banco para calcular elapsed corretamente
+  const refTime=waterGuardian.water_empty_time?new Date(waterGuardian.water_empty_time).getTime():now();
+  const elapsed=now()-refTime;
   const withinTime=elapsed<30*60*1000;
   await SB.from('water_guardian').update({water_empty:false,water_empty_time:null,seal_applied:false}).eq('id',1);
   waterGuardian={...waterGuardian,water_empty:false,water_empty_time:null};
-  waterStartTime=null;
   if(waterInterval){clearInterval(waterInterval);waterInterval=null;}
   document.getElementById('water-timer').textContent='';
   document.getElementById('water-card').classList.remove('alert');
@@ -1118,8 +1303,7 @@ async function nextGuardian(){
   const curr=GUARDIANS.indexOf(waterGuardian?.guardian_id||'bel');
   const next=GUARDIANS[(curr+1)%GUARDIANS.length];
   if(waterInterval){clearInterval(waterInterval);waterInterval=null;}
-  waterStartTime=null;
-  await SB.from('water_guardian').update({guardian_id:next,water_empty:false,water_empty_time:null,seal_applied:false,week_start:today()}).eq('id',1);
+  await SB.from('water_guardian').update({guardian_id:next,water_empty:false,water_empty_time:null,seal_applied:false,week_start:getMondayOfWeek()}).eq('id',1);
   await loadWater();renderDashboard();
   const g=PLAYERS_DEF.find(p=>p.id===next);
   showToast('Semana nova! Guardião: '+(g?.name||next)+' 💧');
@@ -1174,34 +1358,67 @@ function filterT(cat,btn){
 }
 
 // ─── FEED ────────────────────────────────────────────────
+const PIN_COLORS=['red','blue','yellow','green'];
+function fmtDateSP(iso){
+  if(!iso)return '';
+  try{
+    const d=new Date(iso);
+    const now=new Date();
+    const spOpts={timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit'};
+    const time=d.toLocaleTimeString('pt-BR',spOpts);
+    const dayDiff=Math.floor((now-d)/86400000);
+    if(dayDiff===0)return 'hoje · '+time;
+    if(dayDiff===1)return 'ontem · '+time;
+    return d.toLocaleDateString('pt-BR',{timeZone:'America/Sao_Paulo',day:'2-digit',month:'2-digit'})+' · '+time;
+  }catch(e){return '';}
+}
 function renderFeed(){
   const recent=allLogs.slice(0,30);
   if(!recent.length){document.getElementById('feed-list').innerHTML='<div class="empty">Nenhuma tarefa registrada ainda!</div>';return;}
-  document.getElementById('feed-list').innerHTML=recent.map(log=>{
+  document.getElementById('feed-list').innerHTML=recent.map((log,idx)=>{
     const p=players.find(x=>x.id===log.player_id);
     const t=TASKS.find(x=>x.id===log.task_id);
     const isMe=log.player_id===currentPlayer;
+    const pin=PIN_COLORS[idx%PIN_COLORS.length];
+    const taskName=log.task_name||t?.name||log.task_id;
+    const rot=((idx%3)-1)*1.8;
+    const hasPhoto=log.photo_url&&(log.photo_url.startsWith('data')||log.photo_url.startsWith('http'));
+    const photoHtml=hasPhoto
+      ?`<div class="polaroid-wrap">
+          <div class="polaroid" style="transform:rotate(${rot}deg)" onclick="viewPhoto('${log.photo_url}','${taskName.replace(/'/g,"\'")}')">
+            <div class="pol-pin ${pin}"></div>
+            <img src="${log.photo_url}" alt="${taskName}" onerror="this.style.display='none'">
+            <div class="pol-caption">${taskName}</div>
+          </div>
+        </div>`
+      :`<div style="background:#f5f5f5;height:70px;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 12px;border-radius:8px">📷</div>`;
     return `<div class="feed-item">
       <div class="feed-hdr">
         <div class="feed-avatar">${p?.emoji||'👤'}</div>
         <div class="feed-info">
           <div class="feed-player">${p?.name||log.player_id}</div>
-          <div class="feed-task">${log.task_name||t?.name||log.task_id}</div>
+          <div class="feed-task">${taskName}</div>
         </div>
         <div class="feed-pts">+${log.pts} pts</div>
       </div>
-      ${log.photo_url&&log.photo_url.startsWith('data')?`<img class="feed-photo" src="${log.photo_url}" onclick="viewPhoto('${log.photo_url}')">`:'<div style="background:#f5f5f5;height:80px;display:flex;align-items:center;justify-content:center;font-size:30px">📷</div>'}
-      <div class="feed-time">${new Date(log.created_at).toLocaleString('pt-BR')}</div>
-      ${!isMe?`<button class="feed-contest-btn" onclick="openContestFromFeed('${log.player_id}')">⚠️ Contestar esta tarefa</button>`:''}
+      ${photoHtml}
+      <div class="feed-footer" style="display:flex;align-items:center;justify-content:space-between;padding:6px 12px 10px">
+        <span class="feed-time" style="padding:0">${fmtDateSP(log.created_at)}</span>
+        ${!isMe?`<button class="feed-contest-btn" style="margin:0;width:auto;padding:4px 10px" onclick="openContestFromFeed('${log.player_id}')">⚠️ Contestar</button>`:''}
+      </div>
     </div>`;
   }).join('');
 }
 
-function viewPhoto(src){
+function viewPhoto(src,caption){
   const overlay=document.createElement('div');
-  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:500;display:flex;align-items:center;justify-content:center;';
+  overlay.className='photo-overlay';
   overlay.onclick=()=>overlay.remove();
-  overlay.innerHTML=`<img src="${src}" style="max-width:95vw;max-height:95vh;border-radius:12px;">`;
+  const isData=src&&(src.startsWith('data')||src.startsWith('http'));
+  overlay.innerHTML=`<div class="photo-overlay-inner" onclick="event.stopPropagation()">
+    ${isData?`<img src="${src}" alt="${caption||''}">`:`<div style="height:220px;background:#222;display:flex;align-items:center;justify-content:center;font-size:48px">📷</div>`}
+    ${caption?`<div class="photo-overlay-caption">${caption}</div>`:''}
+  </div>`;
   document.body.appendChild(overlay);
 }
 
@@ -1317,13 +1534,55 @@ function renderProfileContent(){
   const el=document.getElementById('profile-content');
   if(profileTab==='seals'){
     const myActiveSeals=activeSeals.filter(s=>s.player_id===profilePlayer);
-    el.innerHTML=`<div class="seals-gallery">
-      ${NEG_SEALS_DEF.map(s=>{
-        const active=myActiveSeals.find(a=>a.seal_id===s.id);
-        const rem=active?Math.ceil((new Date(active.expires_at)-new Date())/(1000*60*60*24)):0;
-        return `<div class="seal-item${active?' neg-active':''}"><div class="seal-emoji">${s.emoji}</div><div class="seal-name">${s.name}</div><div class="seal-status" style="color:${active?'#C44444':'#888'}">${active?rem+'d restantes':'inativo'}</div></div>`;
-      }).join('')}
-    </div>`;
+    const myInsignias=insigniasData.filter(i=>i.player_id===profilePlayer);
+    // Selos negativos ativos
+    const negAtivos=myActiveSeals.filter(s=>NEG_SEALS_DEF.find(d=>d.id===s.seal_id));
+    // Selos positivos ativos (chef_casa, chef_semana, etc.)
+    const posIds=['chef_casa','dobro','protecao','amelie_buff','motorista_feliz'];
+    const posAtivos=myActiveSeals.filter(s=>posIds.includes(s.seal_id));
+    const posLabels={chef_casa:'👨‍🍳 Chef da Casa',dobro:'2️⃣ Dobro de pontos',protecao:'🛡️ Proteção ativa',amelie_buff:'🐾 Buff da Amélie',motorista_feliz:'🚗 Motorista Feliz'};
+    const hasAnything=negAtivos.length||posAtivos.length||myInsignias.length;
+    if(!hasAnything){el.innerHTML='<div class="empty">Nenhum selo ou insígnia ativa no momento 🎉</div>';return;}
+    let out='';
+    // Insígnias conquistadas em destaque
+    if(myInsignias.length){
+      out+=`<p style="font-size:11px;color:#888;font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">🏅 Insígnias</p>`;
+      out+=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">`;
+      out+=myInsignias.map(i=>{
+        const mDate=i.month?new Date(i.month+'-02'):new Date();
+        const mName=mDate.toLocaleDateString('pt-BR',{month:'short'});
+        return `<div style="background:${i.color||'#FFF8F0'};border:1.5px solid ${i.color||'#FFD4A0'};border-radius:12px;padding:10px;text-align:center">
+          <div style="font-size:24px;margin-bottom:3px">${i.icon||'🏅'}</div>
+          <div style="font-size:10px;font-weight:700;color:#333;line-height:1.2">${i.title||'Dono da Casa'}</div>
+          <div style="font-size:9px;color:#888;margin-top:2px">${mName}</div>
+        </div>`;
+      }).join('');
+      out+='</div>';
+    }
+    // Selos positivos ativos
+    if(posAtivos.length){
+      out+=`<p style="font-size:11px;color:#888;font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">✨ Buffs ativos</p>`;
+      out+=`<div class="seals-gallery" style="margin-bottom:12px">`;
+      out+=posAtivos.map(s=>{
+        const rem=Math.ceil((new Date(s.expires_at)-new Date())/60000);
+        const lbl=posLabels[s.seal_id]||s.seal_id;
+        return `<div class="seal-item active"><div class="seal-emoji" style="font-size:20px">${lbl.split(' ')[0]}</div><div class="seal-name">${lbl.slice(lbl.indexOf(' ')+1)}</div><div class="seal-status" style="color:#3D6B3D">${rem}min</div></div>`;
+      }).join('');
+      out+='</div>';
+    }
+    // Selos negativos ativos
+    if(negAtivos.length){
+      out+=`<p style="font-size:11px;color:#888;font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">🚩 Selos negativos</p>`;
+      out+=`<div class="seals-gallery">`;
+      out+=negAtivos.map(s=>{
+        const def=NEG_SEALS_DEF.find(d=>d.id===s.seal_id);
+        if(!def)return '';
+        const rem=Math.ceil((new Date(s.expires_at)-new Date())/(1000*60*60*24));
+        return `<div class="seal-item neg-active"><div class="seal-emoji">${def.emoji}</div><div class="seal-name">${def.name}</div><div class="seal-status" style="color:#C44444">${rem}d restantes</div></div>`;
+      }).join('');
+      out+='</div>';
+    }
+    el.innerHTML=out;
     return;
   }
   let logs=[];
@@ -1428,24 +1687,24 @@ async function submitTask(){
     let bonus=0;let comboName=null;
     const lixoIds=['lixo1','lixo2','lixo3','lixo4','lixo5'];
     if(lixoIds.includes(selTask)){
-      // Pega o MAIOR combo de lixo atingido, não acumula
+      // Pega o MAIOR combo de lixo atingido
       let bestCombo=null;
       LIXO_CHAIN.slice().reverse().forEach(c=>{
-        if(!bestCombo&&c.tasks.every(tid=>doneTodayIds.includes(tid))){
-          bestCombo=c;
-        }
+        if(!bestCombo&&c.tasks.every(tid=>doneTodayIds.includes(tid))){bestCombo=c;}
       });
       if(bestCombo){
-        const s=bestCombo.tasks.reduce((acc,tid)=>{const tk=TASKS.find(x=>x.id===tid);return acc+(tk?tk.pts:0);},0);
-        bonus=Math.round(s*bestCombo.mult*wawaMult*dobroMult*amelieMult)-base;
+        const baseSum=bestCombo.tasks.reduce((acc,tid)=>{const tk=TASKS.find(x=>x.id===tid);return acc+(tk?tk.pts:0);},0);
+        const comboTotal=Math.round(baseSum*bestCombo.mult*wawaMult*dobroMult*amelieMult);
+        // total já inclui a tarefa atual; bonus = extra além do ponto base
+        bonus=Math.max(0,comboTotal-base);
         comboName='Combo Lixo: '+bestCombo.name;
       }
     } else {
       const combo=COMBOS.filter(c=>!LIXO_CHAIN.find(l=>l.name===c.name)).find(c=>c.tasks.every(tid=>doneTodayIds.includes(tid)));
       if(combo){
-        const s=combo.tasks.reduce((acc,tid)=>{const tk=TASKS.find(x=>x.id===tid);return acc+(tk?tk.pts:0);},0);
-        const total=Math.round(s*combo.mult*wawaMult*dobroMult*amelieMult);
-        bonus=total-base;comboName=combo.name;
+        const baseSum=combo.tasks.reduce((acc,tid)=>{const tk=TASKS.find(x=>x.id===tid);return acc+(tk?tk.pts:0);},0);
+        const comboTotal=Math.round(baseSum*combo.mult*wawaMult*dobroMult*amelieMult);
+        bonus=Math.max(0,comboTotal-base);comboName=combo.name;
       }
     }
     const total=Math.max(0,base+bonus);
@@ -1468,270 +1727,4 @@ function quickReg(taskId){
 
 // ─── CUCA ────────────────────────────────────────────────
 function openCucaModal(type){
-  cucaType=type;cucaPartner=null;
-  const ct=CUCA_TYPES[type];
-  document.getElementById('cuca-modal-title').textContent='👨‍🍳 '+ct.label;
-  resetPhoto('photo-cuca');
-  document.getElementById('cuca-dish').value='';
-  const duoSel=document.getElementById('cuca-duo-select');
-  if(ct.duo){
-    duoSel.style.display='block';
-    document.getElementById('cuca-partner').innerHTML=players.filter(p=>p.id!==currentPlayer).map(p=>`<button class="pbtn" onclick="selectCucaPartner('${p.id}',this)">${p.emoji} ${p.name}</button>`).join('');
-  } else duoSel.style.display='none';
-  document.getElementById('cuca-modal').style.display='flex';
-}
-
-function selectCucaPartner(id,btn){
-  cucaPartner=id;
-  document.querySelectorAll('#cuca-partner .pbtn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-}
-
-async function submitCuca(){
-  if(submitting)return;
-  const ct=CUCA_TYPES[cucaType];
-  if(ct.duo&&!cucaPartner){showToast('Selecione o(a) parceiro(a)!');return;}
-  const dish=document.getElementById('cuca-dish').value.trim();
-  if(!dish){showToast('Descreva o que foi preparado!');return;}
-  if(!photoState['photo-cuca']){showToast('📷 Foto do prato obrigatória!');return;}
-  submitting=true;
-  const btn=document.getElementById('btn-submit-cuca');
-  btn.disabled=true;btn.textContent='Salvando...';
-  try{
-    const p=players.find(x=>x.id===currentPlayer);
-    const wawaMult=getWawaMult(currentPlayer);
-    const myPts=ct.pts*wawaMult;
-    await SB.from('cuca_logs').insert({player_id:currentPlayer,type:cucaType,dish,pts:myPts,done_date:today(),is_duo:ct.duo,partner_id:cucaPartner||null,photo_url:photoFiles['photo-cuca']||'uploaded'});
-    await SB.from('players').update({pts:(p.pts||0)+myPts}).eq('id',currentPlayer);
-    if(ct.duo&&cucaPartner){
-      const partner=players.find(x=>x.id===cucaPartner);
-      const partnerWawaMult=getWawaMult(cucaPartner);
-      const partnerPts=ct.pts*partnerWawaMult;
-      await SB.from('cuca_logs').insert({player_id:cucaPartner,type:cucaType,dish,pts:partnerPts,done_date:today(),is_duo:true,partner_id:currentPlayer,photo_url:photoFiles['photo-cuca']||'uploaded'});
-      await SB.from('players').update({pts:(partner.pts||0)+partnerPts}).eq('id',cucaPartner);
-      const expires=new Date(now()+3*24*60*60*1000).toISOString();
-      await SB.from('active_seals').insert({player_id:currentPlayer,seal_id:'chef_casa',expires_at:expires});
-      await SB.from('active_seals').insert({player_id:cucaPartner,seal_id:'chef_casa',expires_at:expires});
-      showToast('👨‍🍳 Dupla registrada! +'+myPts+' pts + selo Chef da Casa!');
-    } else showToast('👨‍🍳 Cozinhada registrada! +'+myPts+' pts!');
-    closeM('cuca-modal');
-    await loadAll();
-    floatPts(myPts);
-  } finally {
-    submitting=false;
-    btn.disabled=false;btn.textContent='Confirmar';
-  }
-}
-
-// ─── AMÉLIE ──────────────────────────────────────────────
-function openAmelieModal(action){
-  // Verificar se já tem buff ativo
-  const existing=activeSeals.find(s=>s.player_id===currentPlayer&&s.seal_id==='amelie_buff');
-  if(existing){showToast('Você já tem o buff da Amélie ativo!');return;}
-  amelieAction=action;
-  document.getElementById('amelie-action-lbl').textContent=AMELIE_ACTIONS[action]||action;
-  resetPhoto('photo-amelie');
-  document.getElementById('amelie-modal').style.display='flex';
-}
-
-async function submitAmelie(){
-  if(submitting)return;
-  if(!photoState['photo-amelie']){showToast('📷 Foto obrigatória!');return;}
-  submitting=true;
-  const btn=document.getElementById('btn-submit-amelie');
-  btn.disabled=true;btn.textContent='Salvando...';
-  try{
-    const expires=new Date(now()+3*60*60*1000).toISOString();
-    await SB.from('active_seals').insert({player_id:currentPlayer,seal_id:'amelie_buff',expires_at:expires});
-    closeM('amelie-modal');
-    await loadAll();
-    showToast('🐾 Buff da Amélie ativo! +10% por 3h');
-  } finally {
-    submitting=false;
-    btn.disabled=false;btn.textContent='Confirmar +10% por 3h';
-  }
-}
-
-// ─── MOTORISTA FELIZ ─────────────────────────────────────
-function openMotorModal(withPhoto){
-  if(currentPlayer==='pepe'){showToast('Apenas outros jogadores podem acionar o Motorista Feliz!');return;}
-  motorWithPhoto=withPhoto;
-  const sub=document.getElementById('motor-modal-sub');
-  const photoDiv=document.getElementById('photo-motor');
-  if(withPhoto){
-    sub.textContent='Inclua uma foto do Pepe sorrindo para +5% extra por 3h para vocês dois!';
-    photoDiv.style.display='block';
-    resetPhoto('photo-motor');
-  } else {
-    sub.textContent='Confirme que o Pepe fez a viagem de bom humor! Ele receberá +5% diário em todas as tarefas.';
-    photoDiv.style.display='none';
-  }
-  document.getElementById('motor-modal').style.display='flex';
-}
-
-async function submitMotor(){
-  if(submitting)return;
-  if(motorWithPhoto&&!photoState['photo-motor']){showToast('📷 Foto do Pepe obrigatória para o bônus!');return;}
-  submitting=true;
-  const btn=document.getElementById('btn-submit-motor');
-  btn.disabled=true;btn.textContent='Salvando...';
-  try{
-    const pepe=players.find(x=>x.id==='pepe');
-    // +5% diário para o Pepe (24h)
-    const expires24=new Date(now()+24*60*60*1000).toISOString();
-    await SB.from('active_seals').insert({player_id:'pepe',seal_id:'motorista_feliz',expires_at:expires24});
-    // Registra como tarefa para histórico
-    await SB.from('task_logs').insert({player_id:currentPlayer,task_id:'motorista_feliz',task_name:'Motorista Feliz acionado',pts:0,done_date:today(),photo_url:photoFiles['photo-motor']||null});
-    if(motorWithPhoto){
-      // +5% extra por 3h para ambos
-      const expires3=new Date(now()+3*60*60*1000).toISOString();
-      await SB.from('active_seals').insert({player_id:'pepe',seal_id:'motorista_bonus',expires_at:expires3});
-      await SB.from('active_seals').insert({player_id:currentPlayer,seal_id:'motorista_bonus',expires_at:expires3});
-      showToast('🚗 Motorista Feliz! Pepe +5%/dia + bônus +5% por 3h para vocês!');
-    } else {
-      showToast('🚗 Motorista Feliz acionado! Pepe ganha +5% em todas as tarefas hoje!');
-    }
-    closeM('motor-modal');
-    await loadAll();
-  } finally {
-    submitting=false;
-    btn.disabled=false;btn.textContent='Confirmar';
-  }
-}
-
-// ─── CONTESTS ────────────────────────────────────────────
-function openContestModal(){
-  contestAccused=null;resetPhoto('photo-contest');
-  document.getElementById('contest-reason').value='';
-  document.getElementById('c-accused').innerHTML=players.filter(p=>p.id!==currentPlayer).map(p=>`<button class="pbtn" onclick="selectAccused('${p.id}',this)">${p.emoji} ${p.name}</button>`).join('');
-  document.getElementById('contest-modal').style.display='flex';
-}
-
-function openContestFromFeed(accusedId){
-  openContestModal();
-  setTimeout(()=>{
-    const btn=document.querySelector(`#c-accused .pbtn[onclick*="${accusedId}"]`);
-    if(btn){selectAccused(accusedId,btn);}
-  },100);
-}
-
-function selectAccused(id,btn){
-  contestAccused=id;
-  document.querySelectorAll('#c-accused .pbtn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-}
-
-async function submitContest(){
-  if(submitting)return;
-  if(!contestAccused){showToast('Selecione quem está sendo contestado!');return;}
-  const reason=document.getElementById('contest-reason').value.trim();
-  if(!reason){showToast('Descreva o motivo da contestação!');return;}
-  if(!photoState['photo-contest']){showToast('📷 Foto obrigatória como evidência!');return;}
-  submitting=true;
-  const btn=document.getElementById('btn-submit-contest');
-  btn.disabled=true;btn.textContent='Enviando...';
-  try{
-    await SB.from('contests').insert({reporter_id:currentPlayer,accused_id:contestAccused,type:document.getElementById('ctype').value,reason,status:'defense',votes_valid:0,votes_invalid:0,photo_url:photoFiles['photo-contest']||'uploaded'});
-    closeM('contest-modal');
-    await loadContests();renderContests();
-    showSec('contests',document.querySelectorAll('.nav button')[5]);
-    showToast('Contestação enviada! Acusado tem 12h para se defender.');
-  } finally {
-    submitting=false;
-    btn.disabled=false;btn.textContent='Enviar contestação';
-  }
-}
-
-async function submitDefense(id){
-  const defense=prompt('Digite sua defesa:');
-  if(!defense)return;
-  await SB.from('contests').update({defense,status:'voting'}).eq('id',id);
-  await loadContests();renderContests();
-  showToast('Defesa registrada! Equipe vai votar.');
-}
-
-async function castContestVote(id,type){
-  // Verificar se já votou nesta contestação
-  const{data:existing}=await SB.from('contest_votes').select('id').eq('contest_id',id).eq('player_id',currentPlayer).single().catch(()=>({data:null}));
-  if(existing){showToast('Você já votou nesta contestação!');return;}
-  const c=contests.find(x=>x.id===id);
-  if(!c)return;
-  const newValid=type==='valid'?c.votes_valid+1:c.votes_valid;
-  const newInvalid=type==='invalid'?c.votes_invalid+1:c.votes_invalid;
-  // Registrar voto
-  await SB.from('contest_votes').insert({contest_id:id,player_id:currentPlayer,vote:type});
-  await SB.from('contests').update({votes_valid:newValid,votes_invalid:newInvalid}).eq('id',id);
-  const total=newValid+newInvalid;
-  if(total>=3){
-    const expires=new Date(now()+7*24*60*60*1000).toISOString();
-    if(newInvalid>=2){
-      await SB.from('active_seals').insert({player_id:c.reporter_id,seal_id:'contestador',expires_at:expires});
-      await SB.from('contests').update({status:'closed'}).eq('id',id);
-      showToast('🚩 Contestação injusta! '+players.find(p=>p.id===c.reporter_id)?.name+' recebe selo.');
-    } else {
-      await SB.from('active_seals').insert({player_id:c.accused_id,seal_id:'descuidado',expires_at:expires});
-      await SB.from('contests').update({status:'closed'}).eq('id',id);
-      showToast('✓ Contestação válida! '+players.find(p=>p.id===c.accused_id)?.name+' recebe selo.');
-    }
-  } else showToast(type==='valid'?'Voto: Válida ✓':'Voto: Injusta ✗');
-  await loadContests();renderContests();
-}
-
-// ─── POLL ────────────────────────────────────────────────
-async function castPoll(optId){
-  const mn=today().slice(0,7);
-  const myVote=pollVotes.find(v=>v.player_id===currentPlayer&&v.month===mn);
-  if(myVote){showToast('Você já votou este mês!');return;}
-  const opt=pollData.find(o=>o.id===optId);
-  if(!opt)return;
-  await SB.from('poll').update({votes:(opt.votes||0)+1}).eq('id',optId);
-  await SB.from('poll_votes').insert({player_id:currentPlayer,poll_id:optId,month:mn});
-  await loadPoll();renderPoll();
-  showToast('Voto registrado! 🗳️');
-}
-
-async function suggestPoll(){
-  // Sugestões vão para o próximo mês
-  const s=prompt('Sugira uma premiação para o próximo mês:');
-  if(!s)return;
-  const nextMonth=new Date();nextMonth.setMonth(nextMonth.getMonth()+1);
-  const nm=nextMonth.toISOString().slice(0,7);
-  await SB.from('poll').insert({option_text:s,votes:0,month:nm});
-  showToast('Sugestão adicionada para '+nextMonthStr()+'! 🎉');
-}
-
-// ─── NAV ─────────────────────────────────────────────────
-function showSec(id,btn){
-  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  if(btn)btn.classList.add('active');
-  if(id==='tasks')renderTasks();
-  if(id==='combos')renderCombos();
-  if(id==='seals'){loadSeals().then(renderSeals);}
-  if(id==='contests'){loadContests().then(renderContests);}
-  if(id==='poll'){loadPoll().then(renderPoll);}
-  if(id==='feed'){renderFeed();}
-}
-
-function closeM(id){document.getElementById(id).style.display='none';}
-
-function showToast(msg){
-  const t=document.createElement('div');t.className='toast';t.textContent=msg;
-  document.body.appendChild(t);
-  setTimeout(()=>{t.style.animation='tout .3s ease forwards';setTimeout(()=>t.remove(),300);},3200);
-}
-
-function floatPts(pts){
-  const el=document.createElement('div');el.className='panim';el.textContent='+'+pts+' pts';
-  el.style.left='50%';el.style.top='40%';document.body.appendChild(el);
-  setTimeout(()=>el.remove(),1500);
-}
-
-// ─── BOOT ────────────────────────────────────────────────
-const saved=sessionStorage.getItem('hsh_player');
-if(saved){enterApp(saved);}
-else{initLogin();}
-</script>
-</body>
-</html>
+  cucaType=ty
