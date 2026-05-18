@@ -1399,7 +1399,7 @@ function renderFeed(){
     const pin=PIN_COLORS[idx%PIN_COLORS.length];
     const taskName=log.task_name||t?.name||log.task_id;
     const rot=((idx%3)-1)*1.8;
-    const hasPhoto=log.photo_url&&(log.photo_url.startsWith('data')||log.photo_url.startsWith('http'));
+    const hasPhoto=log.photo_url&&log.photo_url.length>10&&log.photo_url!=='uploaded';
     const photoHtml=hasPhoto
       ?`<div class="polaroid-wrap">
           <div class="polaroid" style="transform:rotate(${rot}deg)" onclick="viewPhoto('${log.photo_url}','${taskName.replace(/'/g,"\'")}')">
@@ -1628,27 +1628,66 @@ function renderProfileContent(){
             <div class="profile-log-date">${new Date(l.created_at).toLocaleString('pt-BR')}</div>
           </div>
           <div class="profile-log-pts">+${l.pts}</div>
-          ${l.photo_url&&l.photo_url.startsWith('data')?`<img class="profile-log-photo" src="${l.photo_url}" onclick="viewPhoto('${l.photo_url}')">`:''}
+          ${l.photo_url&&l.photo_url.length>10&&l.photo_url!=='uploaded'?`<img class="profile-log-photo" src="${l.photo_url}" onclick="viewPhoto('${l.photo_url}')">`:''}
         </div>`;
       }).join('')}
     </div>`;
 }
 
 // ─── PHOTO ───────────────────────────────────────────────
+async function uploadFoto(file){
+  // Redimensionar imagem antes de fazer upload (max 800px, qualidade 75%)
+  return new Promise((resolve)=>{
+    const img=new Image();
+    const url=URL.createObjectURL(file);
+    img.onload=async()=>{
+      const canvas=document.createElement('canvas');
+      const max=800;
+      let w=img.width,h=img.height;
+      if(w>max||h>max){if(w>h){h=Math.round(h*max/w);w=max;}else{w=Math.round(w*max/h);h=max;}}
+      canvas.width=w;canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      URL.revokeObjectURL(url);
+      canvas.toBlob(async(blob)=>{
+        const fileName=`${currentPlayer}_${Date.now()}.jpg`;
+        const{data,error}=await SB.storage.from('fotos').upload(fileName,blob,{contentType:'image/jpeg',upsert:true});
+        if(error){console.error('Upload error:',error);resolve(null);return;}
+        const{data:urlData}=SB.storage.from('fotos').getPublicUrl(fileName);
+        resolve(urlData.publicUrl);
+      },'image/jpeg',0.75);
+    };
+    img.src=url;
+  });
+}
+
 function simPhoto(id){
   const input=document.createElement('input');
   input.type='file';input.accept='image/*';input.capture='environment';
-  input.onchange=()=>{
+  input.onchange=async()=>{
     if(input.files&&input.files[0]){
-      const reader=new FileReader();
-      reader.onload=(e)=>{
-        photoState[id]=true;
-        photoFiles[id]=e.target.result;
-        const a=document.getElementById(id);
-        a.className='photo ok';
-        a.innerHTML=`<img src="${e.target.result}" style="width:100%;max-height:120px;object-fit:cover;border-radius:8px;margin-bottom:4px"><p style="font-size:11px;color:#3D6B3D;font-weight:600">✅ Foto adicionada!</p>`;
-      };
-      reader.readAsDataURL(input.files[0]);
+      const file=input.files[0];
+      const a=document.getElementById(id);
+      a.className='photo ok';
+      a.innerHTML='<div style="font-size:20px;margin-bottom:3px">⏳</div><p style="font-size:12px;color:#888">Enviando foto...</p>';
+      // Preview local imediato
+      const localUrl=URL.createObjectURL(file);
+      photoState[id]=true;
+      photoFiles[id]=localUrl; // preview temporário
+      a.innerHTML=`<img src="${localUrl}" style="width:100%;max-height:120px;object-fit:cover;border-radius:8px;margin-bottom:4px"><p style="font-size:11px;color:#888">📤 Enviando...</p>`;
+      // Upload para Storage
+      const publicUrl=await uploadFoto(file);
+      if(publicUrl){
+        photoFiles[id]=publicUrl;
+        a.innerHTML=`<img src="${localUrl}" style="width:100%;max-height:120px;object-fit:cover;border-radius:8px;margin-bottom:4px"><p style="font-size:11px;color:#3D6B3D;font-weight:600">✅ Foto enviada!</p>`;
+      } else {
+        // Fallback: usar base64 se upload falhar
+        const reader=new FileReader();
+        reader.onload=(e)=>{
+          photoFiles[id]=e.target.result;
+          a.innerHTML=`<img src="${e.target.result}" style="width:100%;max-height:120px;object-fit:cover;border-radius:8px;margin-bottom:4px"><p style="font-size:11px;color:#E8956D;font-weight:600">⚠️ Foto adicionada (offline)</p>`;
+        };
+        reader.readAsDataURL(file);
+      }
     }
   };
   input.click();
