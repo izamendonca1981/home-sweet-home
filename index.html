@@ -1651,7 +1651,11 @@ async function uploadFoto(file){
       canvas.toBlob(async(blob)=>{
         const fileName=`${currentPlayer}_${Date.now()}.jpg`;
         const{data,error}=await SB.storage.from('fotos').upload(fileName,blob,{contentType:'image/jpeg',upsert:true});
-        if(error){console.error('Upload error:',error);resolve(null);return;}
+        if(error){
+          console.error('Upload error completo:',JSON.stringify(error));
+          showToast('⚠️ Erro upload: '+error.message);
+          resolve(null);return;
+        }
         const{data:urlData}=SB.storage.from('fotos').getPublicUrl(fileName);
         resolve(urlData.publicUrl);
       },'image/jpeg',0.75);
