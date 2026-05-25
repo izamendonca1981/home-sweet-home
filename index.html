@@ -810,6 +810,7 @@ let contestAccused=null,todayLogs=[],allLogs=[],activeSeals=[],contests=[],pollD
 let profilePlayer=null,profileTab='day',cucaLogs=[];
 let amelieAction=null,motorWithPhoto=false;
 let submitting=false;
+let photoUploading={}; // tracks slots with upload in progress
 
 const today=()=>new Date().toISOString().split('T')[0];
 const now=()=>Date.now();
@@ -1672,23 +1673,24 @@ function simPhoto(id){
       const file=input.files[0];
       const a=document.getElementById(id);
       a.className='photo ok';
-      a.innerHTML='<div style="font-size:20px;margin-bottom:3px">⏳</div><p style="font-size:12px;color:#888">Enviando foto...</p>';
-      // Preview local imediato
+      photoState[id]=false;
+      photoFiles[id]=null;
+      photoUploading[id]=true;
       const localUrl=URL.createObjectURL(file);
-      photoState[id]=true;
-      photoFiles[id]=localUrl; // preview temporário
       a.innerHTML=`<img src="${localUrl}" style="width:100%;max-height:120px;object-fit:cover;border-radius:8px;margin-bottom:4px"><p style="font-size:11px;color:#888">📤 Enviando...</p>`;
-      // Upload para Storage
       const publicUrl=await uploadFoto(file);
+      photoUploading[id]=false;
+      URL.revokeObjectURL(localUrl);
       if(publicUrl){
         photoFiles[id]=publicUrl;
-        a.innerHTML=`<img src="${localUrl}" style="width:100%;max-height:120px;object-fit:cover;border-radius:8px;margin-bottom:4px"><p style="font-size:11px;color:#3D6B3D;font-weight:600">✅ Foto enviada!</p>`;
+        photoState[id]=true;
+        a.innerHTML=`<img src="${publicUrl}" style="width:100%;max-height:120px;object-fit:cover;border-radius:8px;margin-bottom:4px"><p style="font-size:11px;color:#3D6B3D;font-weight:600">✅ Foto enviada!</p>`;
       } else {
-        // Fallback: usar base64 se upload falhar
         const reader=new FileReader();
         reader.onload=(e)=>{
           photoFiles[id]=e.target.result;
-          a.innerHTML=`<img src="${e.target.result}" style="width:100%;max-height:120px;object-fit:cover;border-radius:8px;margin-bottom:4px"><p style="font-size:11px;color:#E8956D;font-weight:600">⚠️ Foto adicionada (offline)</p>`;
+          photoState[id]=true;
+          a.innerHTML=`<img src="${e.target.result}" style="width:100%;max-height:120px;object-fit:cover;border-radius:8px;margin-bottom:4px"><p style="font-size:11px;color:#E8956D;font-weight:600">⚠️ Salvo localmente</p>`;
         };
         reader.readAsDataURL(file);
       }
@@ -1698,7 +1700,7 @@ function simPhoto(id){
 }
 
 function resetPhoto(id){
-  photoState[id]=false;photoFiles[id]=null;
+  photoState[id]=false;photoFiles[id]=null;photoUploading[id]=false;
   const a=document.getElementById(id);
   if(!a)return;
   a.className='photo';
@@ -1726,6 +1728,7 @@ function checkCprev(){
 async function submitTask(){
   if(submitting)return;
   if(!selTask){showToast('Selecione uma tarefa!');return;}
+  if(photoUploading['photo-task']){showToast('⏳ Aguarde o upload da foto...');return;}
   if(!photoState['photo-task']){showToast('📷 Foto obrigatória!');return;}
   const already=todayLogs.find(l=>l.player_id===currentPlayer&&l.task_id===selTask);
   if(already){showToast('Você já registrou essa tarefa hoje!');return;}
@@ -1812,6 +1815,7 @@ async function submitCuca(){
   if(ct.duo&&!cucaPartner){showToast('Selecione o(a) parceiro(a)!');return;}
   const dish=document.getElementById('cuca-dish').value.trim();
   if(!dish){showToast('Descreva o que foi preparado!');return;}
+  if(photoUploading['photo-cuca']){showToast('⏳ Aguarde o upload da foto...');return;}
   if(!photoState['photo-cuca']){showToast('📷 Foto do prato obrigatória!');return;}
   submitting=true;
   const btn=document.getElementById('btn-submit-cuca');
@@ -1945,6 +1949,7 @@ async function submitContest(){
   if(!contestAccused){showToast('Selecione quem está sendo contestado!');return;}
   const reason=document.getElementById('contest-reason').value.trim();
   if(!reason){showToast('Descreva o motivo da contestação!');return;}
+  if(photoUploading['photo-contest']){showToast('⏳ Aguarde o upload da foto...');return;}
   if(!photoState['photo-contest']){showToast('📷 Foto obrigatória como evidência!');return;}
   submitting=true;
   const btn=document.getElementById('btn-submit-contest');
@@ -2129,6 +2134,7 @@ async function submitMaos(){
   const desc=document.getElementById('maos-desc').value.trim();
   if(!desc){showToast('Descreva o problema!');return;}
   if(!maosDiff){showToast('Selecione a dificuldade!');return;}
+  if(photoUploading['photo-maos-before']){showToast('⏳ Aguarde o upload da foto...');return;}
   if(!photoState['photo-maos-before']){showToast('📷 Foto do problema obrigatória!');return;}
   submitting=true;
   const btn=document.getElementById('btn-submit-maos');
@@ -2163,6 +2169,7 @@ function openResolverModal(id,desc){
 
 async function submitResolver(){
   if(submitting)return;
+  if(photoUploading['photo-maos-after']){showToast('⏳ Aguarde o upload da foto...');return;}
   if(!photoState['photo-maos-after']){showToast('📷 Foto do resultado obrigatória!');return;}
   submitting=true;
   const btn=document.getElementById('btn-submit-resolver');
